@@ -67,7 +67,7 @@ public class camera : MonoBehaviour
 	/// Angle of rotation around subject that camera aims to achieve
 	/// Gets to this angle over several frames
 	/// </summary>
-	public double targetRot = 0;
+	private double targetRot = 0;
 	/// <summary>
 	/// Number of seconds until slow rotation finishes
 	/// </summary>
