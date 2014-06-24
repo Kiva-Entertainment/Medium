@@ -5,7 +5,6 @@ using System;
 
 public class cam_motion : MonoBehaviour
 {
-
 	/// <summary>
 	/// Object that camera follows and focuses on
 	/// </summary>
@@ -116,13 +115,20 @@ public class cam_motion : MonoBehaviour
 	/// </summary>
 	void handleZoom ()
 	{
-		float z = Input.GetAxis ("Zoom");
+		// Change in dist caused by current keypress
+		float dDist = Input.GetAxis ("Zoom") * distIncrement * Time.deltaTime;
 
-		// Distance to zoom if can zoom
-		float potentialDistance = distance - z * distIncrement * Time.deltaTime;
+		// Determine if can zoom
+		float potentialDistance = distance - dDist;
+		bool canZoom = potentialDistance < maxDist &&
+			potentialDistance > minDist;
 
-		bool canZoom = potentialDistance >= minDist && potentialDistance <= maxDist;
-		if (canZoom)
+		// If can, do and set dist to new dist
+		if (canZoom) {
 			distance = potentialDistance;
+			transform.position = Vector3.MoveTowards(transform.position,
+													subject.transform.position,
+													dDist);
+		}
 	}
 }
