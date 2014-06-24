@@ -3,7 +3,7 @@ using System.Collections;
 
 using System;
 
-public class camera : MonoBehaviour
+public class cam_motion : MonoBehaviour
 {
 
 	/// <summary>
@@ -23,7 +23,7 @@ public class camera : MonoBehaviour
 	/// </summary>
 	public float minDist;
 	/// <summary>
-	/// How far towards/away from subject camera moves each second
+	/// How far towards/away from subject camera moves each second when zooming in/out
 	/// </summary>
 	public float distIncrement;
 
@@ -31,30 +31,37 @@ public class camera : MonoBehaviour
 	/// Current angle (up from xz plane) that camera points at subject. In degrees
 	/// </summary>
 	public float angle;
+	// TODO(kgeffen) Let camera rotate up/down in xz plane
 
-	/// <summary>
-	/// Number of seconds until real rotation matches target rotation
-	/// </summary>
-	public float rotSlowTime;
-
+	// Check that fields are acceptable
+	void Awake() {
+		if (distance > maxDist ||
+		    distance < minDist)
+			throw new ArgumentException("Camera distance field was out of bounds.");
+	}
 
 	void Start () {
-		// Move camera to _distance back from _subject
+		// Camera rotation and translation corrections all happen here
+		// NOTE(kgeffen) They happen here instead of in combination with unity because
+		// 1) Unity has bad ui 2) This makes the vector math clear 3) This is easier to version track
+		// In order to get slanted diagonally down look for view, camera must be moved/rotated
+
+		// Move camera to dist back from subject
 		transform.position = subject.transform.position + new Vector3 (0, 0, -distance);
 
 		// ROTATION SETUP
 		// Reset rotation, must be done before rotation adjustments get made
 		transform.rotation = new Quaternion ();
 
-		// rotate up from ground by *angle* degrees
+		// Rotate up from ground by given number of degrees
 		transform.RotateAround (subject.transform.position,
-		                                  new Vector3 (1, 0, 0),
-		                                  angle);
+								new Vector3 (1, 0, 0),
+								angle);
 		
-		// rotate around y axis 45 degrees to get angled view
+		// Rotate around y axis 45 degrees to get diagonal angled view
 		transform.RotateAround (subject.transform.position,
-		                                   new Vector3 (0, 1, 0),
-		                                   45);
+								new Vector3 (0, 1, 0),
+								45);
 	}
 
 	void Update ()
@@ -70,6 +77,7 @@ public class camera : MonoBehaviour
 	private double targetRot = 0;
 	/// <summary>
 	/// Number of seconds until slow rotation finishes
+	/// Lower number means jerkier camera movement, higher means 'lazier' camera rotation
 	/// </summary>
 	public double timeToRot;
 	/// <summary>
@@ -83,19 +91,24 @@ public class camera : MonoBehaviour
 		else if (Input.GetButtonDown ("RotLeft"))
 			targetRot -= 90;
 
-		if (targetRot >= 360)
+		// Ensure within bounds -180,180
+		// If trying to rotate more than 180 degrees, instead rotate by negative complement
+		if (targetRot > 180)
 			targetRot -= 360;
-		else if (targetRot <= -360)
+		else if (targetRot < -180)
 			targetRot += 360;
 
 		// Rotate towards targetRot
-		// Amount to rotate this tic
+		// Think in units deg * sec / sec = deg
+		// dRot is Amount to rotate this tic
 		double dRot = (targetRot / 2) * Time.deltaTime / timeToRot;
-		targetRot -= dRot;
 
+		// Apply that rotation
 		gameObject.transform.RotateAround (subject.transform.position,
-		                                   new Vector3 (0, 1, 0),
-		                                   (float)dRot);
+											new Vector3 (0, 1, 0),
+											(float)dRot);
+		// Track that rotation by dRot has happened
+		targetRot -= dRot;
 	}
 
 	/// <summary>
@@ -105,9 +118,11 @@ public class camera : MonoBehaviour
 	{
 		float z = Input.GetAxis ("Zoom");
 
+		// Distance to zoom if can zoom
 		float potentialDistance = distance - z * distIncrement * Time.deltaTime;
 
-		if (potentialDistance >= minDist && potentialDistance <= maxDist)
+		bool canZoom = potentialDistance >= minDist && potentialDistance <= maxDist;
+		if (canZoom)
 			distance = potentialDistance;
 	}
 }
