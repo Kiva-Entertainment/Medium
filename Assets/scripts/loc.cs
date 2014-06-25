@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Position of a thing, 2 dimensional
@@ -19,6 +20,15 @@ public class loc {
 	public loc (int x, int z) {
 		this.x = x;
 		this.z = z;
+	}
+
+	// Precondition: theta is multiple of 90 degrees
+	public loc (int x, int z, int theta) {
+		Vector3 v = Quaternion.Euler (0, theta, 0) * new loc (x, z).asVect ();
+
+		// Round and convert
+		this.x = (int)Math.Round(v.x, 0);
+		this.z = (int)Math.Round(v.z, 0);
 	}
 
 	public loc plus (loc l) {

@@ -6,6 +6,14 @@ using System;
 public class cam_motion : MonoBehaviour
 {
 	/// <summary>
+	/// Get the perspective of the camera, in degrees rotated around cursor
+	/// </summary>
+	/// <returns> Angle in degrees that camera is rotated around cursor </returns>
+	public int getPerspective () {
+		return realRot;
+	}
+
+	/// <summary>
 	/// Object that camera follows and focuses on
 	/// </summary>
 	public GameObject subject;
@@ -29,7 +37,7 @@ public class cam_motion : MonoBehaviour
 	/// <summary>
 	/// Current angle (up from xz plane) that camera points at subject. In degrees
 	/// </summary>
-	public float angle;
+	public float lift;
 	// TODO(kgeffen) Let camera rotate up/down in xz plane
 
 	// Check that fields are acceptable
@@ -55,7 +63,7 @@ public class cam_motion : MonoBehaviour
 		// Rotate up from ground by given number of degrees
 		transform.RotateAround (subject.transform.position,
 								new Vector3 (1, 0, 0),
-								angle);
+								lift);
 		
 		// Rotate around y axis 45 degrees to get diagonal angled view
 		transform.RotateAround (subject.transform.position,
@@ -70,10 +78,15 @@ public class cam_motion : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Angle of rotation around subject that camera aims to achieve
-	/// Gets to this angle over several frames
+	/// Remaining angle of rotation around subject that camera aims to achieve
+	/// Over several frames, rotates this many degrees
 	/// </summary>
-	private double targetRot = 0;
+	public double remRot = 0;
+	/// <summary>
+	/// The angle of rotation camera will posses once it has finished rotating
+	/// Determines current perspective of camera, which affects cursor motion
+	/// </summary>
+	private int realRot = 0;
 	/// <summary>
 	/// Number of seconds until slow rotation finishes
 	/// Lower number means jerkier camera movement, higher means 'lazier' camera rotation
@@ -84,30 +97,39 @@ public class cam_motion : MonoBehaviour
 	/// </summary>
 	void handleRotation ()
 	{
-		// Determine targetRot
-		if (Input.GetButtonDown ("RotRight"))
-			targetRot += 90;
-		else if (Input.GetButtonDown ("RotLeft"))
-			targetRot -= 90;
+		// Determine how much camera wants to rotate
+		// And the eventual rotation of camera
+		if (Input.GetButtonDown ("RotRight")) {
+			remRot += 90;
+			realRot += 90;
+		}
+		else if (Input.GetButtonDown ("RotLeft")) {
+			remRot -= 90;
+			realRot -= 90;
+		}
+
+		// Ensure that realRot is within bounds 0-360
+		// Otherwise it could grow beyond bounds of acceptable int values
+		realRot = realRot % 360;
 
 		// Ensure within bounds -180,180
 		// If trying to rotate more than 180 degrees, instead rotate by negative complement
-		if (targetRot > 180)
-			targetRot -= 360;
-		else if (targetRot < -180)
-			targetRot += 360;
+		if (remRot > 180)
+			remRot -= 360;
+		else if (remRot < -180)
+			remRot += 360;
 
 		// Rotate towards targetRot
 		// Think in units deg * sec / sec = deg
 		// dRot is Amount to rotate this tic
-		double dRot = (targetRot / 2) * Time.deltaTime / timeToRot;
+		double dRot = (remRot / 2) * Time.deltaTime / timeToRot;
 
 		// Apply that rotation
 		gameObject.transform.RotateAround (subject.transform.position,
 											new Vector3 (0, 1, 0),
 											(float)dRot);
 		// Track that rotation by dRot has happened
-		targetRot -= dRot;
+		remRot -= dRot;
 	}
 
 	/// <summary>
