@@ -1,23 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ground : MonoBehaviour {
+public class world_ground : MonoBehaviour {
 
 	private Grid[,] grids;
 
 	void Start () {
 		// Data for spaces will be read from json here at some point
-		// TODO(kgeffen)
+		// TODO(kgeffen) do that thing with the jsons
 		grids = new Grid[10, 10];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0;  j < 10; j++) {
 				grids[i, j] = new Grid(i * j);
 			}
 		}
-	}
-
-	void Update () {
-		
 	}
 
 	/// <summary>
@@ -28,14 +24,15 @@ public class ground : MonoBehaviour {
 	private int getZ () { return grids.GetLength (1); }
 
 	public bool inBounds (loc l) {
-		// TODO(kgeffen) explain adding 1
+		// Out of bounds if x/z is less than 0 or more than highest respective x/z
 		return !(l.x < 0 ||
-		        l.x + 1 > getX () ||
+		        l.x > getX () - 1 ||
 		        l.z < 0 ||
-		        l.z + 1 > getZ ());
+		        l.z > getZ () - 1 );
 	}
 }
 
+// TODO(kgeffen) Make this it's own class if other scripts need to access it
 /// <summary>
 /// A single square on the field
 /// Unless a hole, has height
