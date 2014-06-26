@@ -1,15 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/cam/camZoom.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/world/World.cs">
     <Files>
-      <File FileName="Assets/scripts/world_ground.cs" Line="62" Column="1" />
-      <File FileName="Assets/scripts/cursor_motion.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/loc.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/cam_motion.cs" Line="19" Column="28" />
-      <File FileName="Assets/scripts/cam/camZoom.cs" Line="7" Column="15" />
-      <File FileName="Assets/scripts/cam/camRotate.cs" Line="4" Column="15" />
-      <File FileName="Assets/scripts/cam/camSetup.cs" Line="10" Column="2" />
-      <File FileName="Assets/scripts/cam/camState.cs" Line="5" Column="54" />
+      <File FileName="Assets/scripts/world/World.cs" Line="4" Column="19" />
+      <File FileName="Assets/scripts/Map.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/Grid.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/cursor/CursorCardinalMotion.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/cursor/CursorSetup.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
