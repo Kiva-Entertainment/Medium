@@ -49,14 +49,12 @@
      <Compile Include="Assets\scripts\Grid.cs" />
      <Compile Include="Assets\scripts\Loc.cs" />
      <Compile Include="Assets\scripts\Map.cs" />
-     <Compile Include="Assets\scripts\WorldSetup.cs" />
+     <Compile Include="Assets\scripts\World.cs" />
+     <Compile Include="Assets\scripts\cam\Cam.cs" />
      <Compile Include="Assets\scripts\cam\CamRotate.cs" />
-     <Compile Include="Assets\scripts\cam\CamSetup.cs" />
-     <Compile Include="Assets\scripts\cam\CamState.cs" />
      <Compile Include="Assets\scripts\cam\CamZoom.cs" />
+     <Compile Include="Assets\scripts\cursor\Cursor.cs" />
      <Compile Include="Assets\scripts\cursor\CursorCardinalMotion.cs" />
-     <Compile Include="Assets\scripts\cursor\CursorSetup.cs" />
-     <Compile Include="Assets\scripts\cursor\CursorState.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

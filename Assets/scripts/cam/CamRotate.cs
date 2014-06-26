@@ -36,7 +36,7 @@ public class CamRotate : MonoBehaviour {
 		double dRot = (rotLeft / 2) * Time.deltaTime / rotSpeed;
 		
 		// Apply that rotation
-		gameObject.transform.RotateAround (CamState.subject.transform.position,
+		gameObject.transform.RotateAround (Cam.main.subject.transform.position,
 		                                   new Vector3 (0, 1, 0),
 		                                   (float) dRot);
 
@@ -50,14 +50,14 @@ public class CamRotate : MonoBehaviour {
 		// NOTE(kgeffen) Both button checks happen because if both are pressed the rotation should cancel
 		if (Input.GetButtonDown ("RotRight")) {
 			rotLeft += 90;
-			CamState.perspective += 90;
+			Cam.main.perspective += 90;
 		}
 		if (Input.GetButtonDown ("RotLeft")) {
 			rotLeft -= 90;
-			CamState.perspective -= 90;
+			Cam.main.perspective -= 90;
 		}
 
 		// Ensure that perspective is one of - {0, 90, 180, 270}
-		CamState.perspective %= 360;
+		Cam.main.perspective %= 360;
 	}
 }

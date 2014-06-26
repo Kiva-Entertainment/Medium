@@ -6,8 +6,8 @@ using System;
 /// Does not have y value
 /// </summary>
 public class Loc {
-	public int x { get; set; }
-	public int z { get; set; }
+	public int x;
+	public int z;
 
 	public Vector3 asVect () {
 		return new Vector3 (x, 0, z);
@@ -23,6 +23,7 @@ public class Loc {
 	}
 
 	// Precondition: theta is multiple of 90 degrees
+	// Make a location with given x and z, rotated by theta degrees
 	public Loc (int x, int z, int theta) {
 		Vector3 v = Quaternion.Euler (0, theta, 0) * new Loc (x, z).asVect ();
 

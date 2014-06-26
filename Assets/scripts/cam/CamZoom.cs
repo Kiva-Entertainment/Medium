@@ -33,15 +33,15 @@ public class CamZoom : MonoBehaviour {
 		float dDist = Input.GetAxis ("Zoom") * distIncrement * Time.deltaTime;
 		
 		// Determine if can zoom
-		float potentialDistance = CamState.dist - dDist;
+		float potentialDistance = Cam.main.dist - dDist;
 		bool canZoom = potentialDistance < maxDist &&
 			potentialDistance > minDist;
 		
 		// If can, do and set dist to new dist
 		if (canZoom) {
-			CamState.dist = potentialDistance;
+			Cam.main.dist = potentialDistance;
 			transform.position = Vector3.MoveTowards(transform.position,
-			                                         CamState.subject.transform.position,
+			                                         Cam.main.subject.transform.position,
 			                                         dDist);
 		}
 	}

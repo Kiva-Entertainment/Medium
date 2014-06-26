@@ -3,28 +3,41 @@ using System.Collections;
 
 /// <summary>
 /// Setup the starting state of and position/orientation of camera.
+/// Contains info about 
 /// </summary>
-public class CamSetup : MonoBehaviour {
+public class Cam : MonoBehaviour {
+
+	/// <summary>
+	/// The main camera, which focuses on subject.
+	/// </summary>
+	public static Cam main;
 
 	/// <summary>
 	/// The GameObject that camera follows
+	/// Camera rotates around and zooms into/away from this object
 	/// </summary>
 	public GameObject subject;
+	
+	/// <summary>
+	/// The perspective of the camera, expressed as degrees of rotation about y axis
+	/// Precondition - perspective will always be one of the following - {0, 90, 180, 270}
+	/// </summary>
+	public int perspective;
+	
+	/// <summary>
+	/// How zoomed in the camera is upon subject currently
+	/// Expressed as distance between camera and subject
+	/// Distance is checked and modified by camZoom script
+	/// </summary>
+	public float dist;
 
 	/// <summary>
 	/// Angle (up from xz plane) that camera points at subject. In degrees
 	/// </summary>
 	public float lift;
 
-	/// <summary>
-	/// How zoomed in the camera is initially
-	/// Represented in distance between camera and subject
-	/// </summary>
-	public float dist;
-	
 	void Awake () {
-		CamState.subject = subject;
-		CamState.dist = dist;
+		main = this;
 	}
 
 	void Start () {
