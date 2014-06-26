@@ -39,14 +39,7 @@ public class cam_motion : MonoBehaviour
 	/// </summary>
 	public float lift;
 	// TODO(kgeffen) Let camera rotate up/down in xz plane
-
-	// Check that fields are acceptable
-	void Awake() {
-		if (distance > maxDist ||
-		    distance < minDist)
-			throw new ArgumentException("Camera distance field was out of bounds.");
-	}
-
+	
 	void Start () {
 		// Camera rotation and translation corrections all happen here
 		// NOTE(kgeffen) They happen here instead of in combination with unity because

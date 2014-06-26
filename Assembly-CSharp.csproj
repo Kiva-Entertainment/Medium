@@ -46,6 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\scripts\cam\CamRotate.cs" />
+     <Compile Include="Assets\scripts\cam\CamSetup.cs" />
+     <Compile Include="Assets\scripts\cam\CamState.cs" />
+     <Compile Include="Assets\scripts\cam\CamZoom.cs" />
      <Compile Include="Assets\scripts\cam_motion.cs" />
      <Compile Include="Assets\scripts\cursor_motion.cs" />
      <Compile Include="Assets\scripts\loc.cs" />

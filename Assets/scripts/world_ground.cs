@@ -38,7 +38,15 @@ public class world_ground : MonoBehaviour {
 /// Unless a hole, has height
 /// </summary>
 public class Grid {
+	/// <summary>
+	/// Gets or sets a value indicating whether this <see cref="Grid"/> is hole.
+	/// </summary>
+	/// <value><c>true</c> if is hole; otherwise, <c>false</c>.</value>
 	public bool isHole { get; set; }
+	/// <summary>
+	/// Height of this <see cref="cref="Grid"/>, in decimeters.
+	/// </summary>
+	/// <value>Height of grid, in decimeters.</value>
 	public int height { get; set; }
 	
 	public Grid () {
