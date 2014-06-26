@@ -1,11 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/world/World.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/cursor/CursorSetup.cs">
     <Files>
-      <File FileName="Assets/scripts/world/World.cs" Line="4" Column="19" />
-      <File FileName="Assets/scripts/Map.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/Map.cs" Line="9" Column="2" />
       <File FileName="Assets/scripts/Grid.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/cursor/CursorCardinalMotion.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/cursor/CursorCardinalMotion.cs" Line="10" Column="3" />
       <File FileName="Assets/scripts/cursor/CursorSetup.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

@@ -19,7 +19,7 @@ public class Map {
 	public Map () {
 		// TODO(kgeffen) Actually load this info from somewhere.
 
-		gridArray = new Grid[10, 8];
+		gridArray = new Grid[7, 5];
 		for (int i = 0; i < gridArray.GetLength(0); i++) {
 			for (int j = 0;  j < gridArray.GetLength(1); j++) {
 				gridArray[i, j] = new Grid(i * j);
