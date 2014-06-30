@@ -6,7 +6,8 @@ public class World : MonoBehaviour {
 	public Map map;
 
 	void Awake () {
-		current = new World ();
+		map = new Map ();
+		current = this;
 	}
 	
 	public World () {
