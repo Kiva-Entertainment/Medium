@@ -3,18 +3,17 @@ using System.Collections;
 
 /// <summary>
 /// Setup the starting state of and position/orientation of camera.
-/// Contains info about 
 /// </summary>
 public class Cam : MonoBehaviour {
 
 	/// <summary>
-	/// The main camera, which focuses on subject.
+	/// The main camera, which focuses on cursor.
 	/// </summary>
 	public static Cam main;
 
 	/// <summary>
-	/// The GameObject that camera follows
-	/// Camera rotates around and zooms into/away from this object
+	/// The GameObject that camera follows.
+	/// Camera rotates around and zooms into/away from this object.
 	/// </summary>
 	public GameObject subject;
 	
@@ -25,14 +24,14 @@ public class Cam : MonoBehaviour {
 	public int perspective;
 	
 	/// <summary>
-	/// How zoomed in the camera is upon subject currently
-	/// Expressed as distance between camera and subject
-	/// Distance is checked and modified by camZoom script
+	/// How zoomed in the camera is upon subject currently.
+	/// Expressed as distance between camera and subject.
+	/// Distance is checked and modified by camZoom script.
 	/// </summary>
 	public float dist;
 
 	/// <summary>
-	/// Angle (up from xz plane) that camera points at subject. In degrees
+	/// Angle (up from xz plane) that camera points at subject. In degrees.
 	/// </summary>
 	public float lift;
 

@@ -2,8 +2,8 @@ using UnityEngine;
 using System;
 
 /// <summary>
-/// Position of a thing, 2 dimensional
-/// Does not have y value
+/// Position of a thing, 2 dimensional.
+/// Does not have y value.
 /// </summary>
 public class Loc {
 	public int x;
@@ -32,6 +32,10 @@ public class Loc {
 		this.z = (int)Math.Round(v.z, 0);
 	}
 
+	/// <summary>
+	/// Sum 2 locations and return result.
+	/// </summary>
+	/// <param name="l">Location to add to location plus is called on.</param>
 	public Loc plus (Loc l) {
 		return new Loc (x + l.x, z + l.z);
 	}

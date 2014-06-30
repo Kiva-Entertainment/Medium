@@ -2,8 +2,8 @@
 using System.Collections;
 
 /// <summary>
-/// A single square on the field
-/// Unless a hole, has height
+/// A single square on the field.
+/// Unless a hole, has height.
 /// </summary>
 public class Grid {
 

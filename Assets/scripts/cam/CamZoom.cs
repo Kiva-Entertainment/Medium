@@ -23,9 +23,14 @@ public class CamZoom : MonoBehaviour {
 	public float distIncrement;
 
 	// TODO(kgeffen) Add a check that distance is within bounds of acceptable distance
+	void Start ()
+	{
+		if (Cam.main.dist > maxDist ||Cam.main.dist < minDist)
+			throw new ArgumentOutOfRangeException ("Starting distance between camera and cursor was outside of acceptable bounds.");
+	}
 
 	/// <summary>
-	/// Zoom in/out based on zoom axis input
+	/// Zoom in/out based on zoom axis input.
 	/// </summary>
 	void Update ()
 	{

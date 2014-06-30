@@ -9,7 +9,7 @@ public class Map {
 
 	/// <summary>
 	/// Array of grids which make up the map.
-	/// Each has a height and is or isn't a hole
+	/// Each has a height and is or isn't a hole.
 	/// </summary>
 	private Grid[,] gridArray;
 	private string source;

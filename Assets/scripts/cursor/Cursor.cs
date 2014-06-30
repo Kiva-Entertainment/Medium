@@ -3,10 +3,9 @@ using System.Collections;
 
 public class Cursor : MonoBehaviour {
 	/// <summary>
-	/// The only cursor.
-	/// May change when 2-p exists
+	/// The only cursor in the scene
 	/// </summary>
-	public static Cursor single;
+	public static Cursor current;
 
 	/// <summary>
 	/// Current location of cursor.
@@ -14,11 +13,13 @@ public class Cursor : MonoBehaviour {
 	public Loc loc;
 
 	void Awake () {
-		// Perform actual transformation
+		// Perform actual transformation of cursor to origin
 		transform.position = Vector3.zero;
 
-		// Set fields
+		// Set fields with starting values
 		loc = new Loc (0, 0);
-		single = this;
+
+		// Make this cursor publically accessible
+		current = this;
 	}
 }
