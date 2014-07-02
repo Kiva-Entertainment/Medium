@@ -27,9 +27,12 @@ public class CursorCardinalMotion : MonoBehaviour {
 		Loc potLoc = Cursor.current.loc.plus (dLoc);
 		if ( World.current.isInBounds ( potLoc ) ) {
 
-			// Change location of cursor to new location - both stored value and actual position
+			// Change cursor's stored location
 			Cursor.current.loc = potLoc;
-			transform.position = potLoc.asVect();
+
+			// Change cursor's actual position
+			float height = World.current.map.getHeight (potLoc);
+			transform.position = potLoc.asVect () + new Vector3(0, height, 0);
 		}
 	}
 }

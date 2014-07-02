@@ -8,14 +8,14 @@ using System.Collections;
 public class Grid {
 
 	public bool isHole;
-	public int height;
+	public float height;
 	
 	public Grid () {
 		isHole = true;
 		height = 0;
 	}
 	
-	public Grid (int height) {
+	public Grid (float height) {
 		isHole = false;
 		this.height = height;
 	}

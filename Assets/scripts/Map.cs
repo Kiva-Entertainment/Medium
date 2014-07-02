@@ -22,12 +22,16 @@ public class Map {
 		gridArray = new Grid[7, 5];
 		for (int i = 0; i < gridArray.GetLength(0); i++) {
 			for (int j = 0;  j < gridArray.GetLength(1); j++) {
-				gridArray[i, j] = new Grid(i * j);
+				gridArray[i, j] = new Grid( (i + j) / 10.0f );
 			}
 		}
 
 		x = gridArray.GetLength (0);
 		z = gridArray.GetLength (1);
+	}
+	
+	public float getHeight (Loc l) {
+		return gridArray [l.x, l.z].height;
 	}
 
 	public bool isInBounds (Loc l) {
