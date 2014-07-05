@@ -39,4 +39,9 @@ public class Loc {
 	public Loc plus (Loc l) {
 		return new Loc (x + l.x, z + l.z);
 	}
+
+	public static Loc zero
+	{
+		get { return new Loc (); }
+	}
 }
