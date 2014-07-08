@@ -5,14 +5,14 @@ using System;
 /// Position of a thing, 2 dimensional.
 /// Does not have y value.
 /// </summary>
-public class Loc {
+public class Loc : IEquatable<Loc> {
 	public int x;
 	public int z;
 
 	public Vector3 asVect () {
 		return new Vector3 (x, 0, z);
 	}
-	
+
 	public Loc () {
 		x = z = 0;
 	}
@@ -43,5 +43,9 @@ public class Loc {
 	public static Loc zero
 	{
 		get { return new Loc (); }
+	}
+
+	public bool Equals (Loc l2) {
+		return x == l2.x && z == l2.z;
 	}
 }

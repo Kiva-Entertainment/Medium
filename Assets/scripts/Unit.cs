@@ -2,19 +2,10 @@
 using System.Collections;
 
 /// <summary>
-/// A unit is anything which occupies a space on the map.
-/// Soldiers, barrels, etc. are all units.
+/// Anything which does or can occupy a space on a map.
+/// Such as: A barrel, a wizard, a bear.
 /// </summary>
-public class Unit : MonoBehaviour {
-	public UnitStats stats;
-}
-
-/// <summary>
-/// The stats for a unit.
-/// All information about the unit besides physical presence.
-/// In other words, everything that can be known even if unit is not deployed.
-/// </summary>
-public class UnitStats {
+public class Unit {
 	string name;
 	string type;
 
@@ -33,7 +24,20 @@ public class UnitStats {
 	int intelligence;
 	int willpower;
 
-	public UnitStats (string name = "Bob",
+	/// <summary>
+	/// Whether or not this unit is deployed, or the stats reference a theoretical unit.
+	/// </summary>
+	bool deployed = false;
+	/// <summary>
+	/// The game object which represents this unit, is none if not deployed.
+	/// </summary>
+	GameObject self;
+	/// <summary>
+	/// If deployed, the current location of this unit.
+	/// </summary>
+	Loc loc;
+
+	public Unit (string name = "Bob",
 				string type = "Soldier",
 				int hpMax = 100,
 				int hpCur = 100,
@@ -64,21 +68,35 @@ public class UnitStats {
 		this.willpower = willpower;
 	}
 
-	public void deploy (Loc loc) {
+	/// <summary>
+	/// Returns true if unit is currently deployed to the field.
+	/// </summary>
+	public bool isDeployed () { return deployed; }
 
-		GameObject ob = Object.Instantiate (Resources.Load ("Soldier"),
-											loc.asVect(),
-											Quaternion.identity) as GameObject;
-		return;
-//		//spawn object
-//		GameObject ob = new GameObject("Cool GameObject made from Code");
-//		//Add Components
-//		// Add a mesh filter to ob
-//		MeshFilter m = ob.AddComponent<MeshFilter> ();
-//		// Get the mesh that we want, and switch ob's mesh to desired mesh
-//		GameObject tempOb = Resources.Load ("Soldier") as GameObject;
-//		m.mesh = tempOb.GetComponent<MeshFilter> ().mesh;
-//		// Add a renderer to ob
-//		ob.AddComponent<MeshRenderer> ();
+	/// <summary>
+	/// Deploy this unit to a given location on the map.
+	/// </summary>
+	/// <param name="loc">The location that the unit is being deployed to.</param>
+	public void deploy (Loc loc) {
+		if ( isDeployed () )
+			throw new System.Exception("Unit you attempted to deploy is already deployed");
+
+		self = Object.Instantiate (Resources.Load ("Soldier"),
+									Vector3.zero,
+									Quaternion.identity) as GameObject;
+		move (loc);
+		deployed = true;
 	}
+
+	/// <summary>
+	/// Move unit to given space.
+	/// Precondition: Space must be valid.
+	/// Space should be on the ground for current map, so y must be raised from xz plane.
+	/// </summary>
+	public void move (Loc loc) {
+		this.loc = loc;
+		self.transform.position = World.current.onGround (loc);
+	}
+
+	public Loc getLoc () { return loc; }
 }
