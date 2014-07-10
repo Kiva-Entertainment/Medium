@@ -41,4 +41,6 @@ public class Map {
 		         l.z < 0 ||
 		         l.z > z - 1 );
 	}
+
+	public bool isHole(Loc l) { return gridArray[l.x, l.z].isHole; }
 }

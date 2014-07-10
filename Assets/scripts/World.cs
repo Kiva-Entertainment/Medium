@@ -54,7 +54,7 @@ public class World : MonoBehaviour {
 	/// Must both be empty and on map.
 	/// </summary>
 	public bool isAvailable (Loc l) {
-		return isInBounds (l) && getUnit (l) == null;
+		return isInBounds (l) && !isHole(l) && getUnit (l) == null;
 	}
 
 	/// <summary>
@@ -64,4 +64,6 @@ public class World : MonoBehaviour {
 	public Vector3 onGround (Loc l) {
 		return l.asVect () + new Vector3(0, map.getHeight(l), 0);
 	}
+
+	public bool isHole (Loc l) { return map.isHole (l); }
 }
