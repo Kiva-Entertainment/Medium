@@ -14,11 +14,13 @@ public class World : MonoBehaviour {
 		units = new Unit[2];
 		for (int i = 0; i < units.Length; i++)
 		{
-			units[i] = new Unit("Bob " + i);
+			units[i] = new Unit(name: "Bob " + i, mvCur: 3);
 
 			// Deploy unit
 			units[i].deploy(new Loc(i, i));
 		}
+
+		MoveRange.determine (units [0]);
 	}
 	
 	public World () {
@@ -28,6 +30,10 @@ public class World : MonoBehaviour {
 	public bool isInBounds (Loc l) {
 		return map.isInBounds (l);
 	}
+
+
+	public float getHeight (Loc loc) { return map.getHeight (loc); }
+	public float getHeight (int x, int z) { return getHeight (new Loc (x, z)); }
 
 	/// <summary>
 	/// Get unit in given location, or return null if no unit found/location is not in bounds.

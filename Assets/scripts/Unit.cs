@@ -6,23 +6,24 @@ using System.Collections;
 /// Such as: A barrel, a wizard, a bear.
 /// </summary>
 public class Unit {
-	string name;
-	string type;
+	public string name { get; private set; }
+	public string type { get; private set; }
 
-	int hpMax;
-	int hpCur;
-	int spMax;
-	int spCur;
+	public int hpMax { get; private set; }
+	public int hpCur { get; private set; }
+	public int spMax { get; private set; }
+	public int spCur { get; private set; }
 
-	int actMax;
-	int actCur;
-	int mvMax;
-	int mvCur;
+	public int actMax { get; private set; }
+	public int actCur { get; private set; }
+	public int mvMax { get; private set; }
+	public int mvCur { get; private set; }
+	public float jump { get; private set; }
 
-	int strength;
-	int toughness;
-	int intelligence;
-	int willpower;
+	public int strength { get; private set; }
+	public int toughness { get; private set; }
+	public int intelligence { get; private set; }
+	public int willpower { get; private set; }
 
 	/// <summary>
 	/// Whether or not this unit is deployed, or the stats reference a theoretical unit.
@@ -35,7 +36,7 @@ public class Unit {
 	/// <summary>
 	/// If deployed, the current location of this unit.
 	/// </summary>
-	Loc loc;
+	public Loc loc { get; private set; }
 
 	public Unit (string name = "Bob",
 				string type = "Soldier",
@@ -47,6 +48,7 @@ public class Unit {
 				int actCur = 1,
 				int mvMax = 5,
 				int mvCur = 5,
+				float jump = 0.5f,
 				int strength = 100,
 				int toughness = 100,
 				int intelligence = 100,
@@ -62,6 +64,7 @@ public class Unit {
 		this.actCur = actCur;
 		this.mvMax = mvMax;
 		this.mvCur = mvCur;
+		this.jump = jump;
 		this.strength = strength;
 		this.toughness = toughness;
 		this.intelligence = intelligence;
