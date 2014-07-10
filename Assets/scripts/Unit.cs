@@ -81,7 +81,8 @@ public class Unit {
 		if ( isDeployed () )
 			throw new System.Exception("Unit you attempted to deploy is already deployed");
 
-		self = Object.Instantiate (Resources.Load ("Soldier"),
+		// Make an object of unit's type at origin, then move it to current loc
+		self = Object.Instantiate (Resources.Load (type),
 									Vector3.zero,
 									Quaternion.identity) as GameObject;
 		move (loc);

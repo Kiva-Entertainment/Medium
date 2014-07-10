@@ -13,6 +13,9 @@ public class CursorSelect : MonoBehaviour {
 	Job job = Job.SelectingActor;
 	Unit actor;
 
+	/// <summary>
+	/// Each update, if select button is pressed, do various form of selection based on current context.
+	/// </summary>
 	void Update () {
 		if (!Input.GetButtonDown ("Select"))
 			return;
@@ -28,19 +31,27 @@ public class CursorSelect : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Select an actor to do things such as move, attack, inspect, etc.
+	/// </summary>
 	void selectActor ()
 	{
 		Unit u = World.current.getUnit (Cursor.current.loc);
 		if (u  != null) {
+			gameObject.renderer.material.color = Color.green;
 			actor = u;
 			job = Job.selectingSpace;
 		}
 	}
 
+	/// <summary>
+	/// Select a space for the currently selected actor to move to.
+	/// </summary>
 	void selectSpace ()
 	{
 		Loc cursorLoc = Cursor.current.loc;
 		if (World.current.isAvailable (cursorLoc)) {
+			gameObject.renderer.material.color = Color.red;
 			actor.move(cursorLoc);
 			job = Job.SelectingActor;
 		}
