@@ -23,7 +23,7 @@ public class MoveRange {
 			// Reset fromRing, repopulate in loop below
 			fromRing = new List<Move>();
 
-			foreach (Move newMove in fromRing) {
+			foreach (Move newMove in newRing) {
 				// Ensure no doubles get added
 				if (spaceUnique(newMove, result)) {
 					result.Add(newMove);

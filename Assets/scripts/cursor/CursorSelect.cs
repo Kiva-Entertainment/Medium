@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Move the cursor in any of the 4 cardinal directions based on keyboard input
 /// </summary>
 public class CursorSelect : MonoBehaviour {
+
+	List<GameObject> markers = new List<GameObject>();
 
 	// WHat the cursor is about to do.
 	enum Job {SelectingActor,
@@ -44,11 +47,13 @@ public class CursorSelect : MonoBehaviour {
 
 			// Display spaces actor can move to
 			Move[] validMoves = MoveRange.determine(u);
-			Debug.Log (validMoves.Length);
+
 			foreach ( Move m in validMoves ) {
-				Object.Instantiate (Resources.Load ("marker"),
-									m.loc.asVect(),
-									Quaternion.identity);
+
+				markers.Add(
+					Object.Instantiate (Resources.Load ("marker"),
+										World.current.onGround(m.loc),
+										Quaternion.identity) as GameObject);
 			}
 		}
 	}
@@ -63,6 +68,9 @@ public class CursorSelect : MonoBehaviour {
 			gameObject.renderer.material.color = Color.red;
 			actor.move(cursorLoc);
 			job = Job.SelectingActor;
+
+			foreach(GameObject o in markers)
+				Destroy(o);
 		}
 	}
 }
