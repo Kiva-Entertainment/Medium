@@ -41,6 +41,15 @@ public class CursorSelect : MonoBehaviour {
 			gameObject.renderer.material.color = Color.green;
 			actor = u;
 			job = Job.selectingSpace;
+
+			// Display spaces actor can move to
+			Move[] validMoves = MoveRange.determine(u);
+			Debug.Log (validMoves.Length);
+			foreach ( Move m in validMoves ) {
+				Object.Instantiate (Resources.Load ("marker"),
+									m.loc.asVect(),
+									Quaternion.identity);
+			}
 		}
 	}
 
