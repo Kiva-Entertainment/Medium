@@ -65,22 +65,26 @@ public class CursorSelect : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Select a space for the currently selected actor to move to.
+	/// Move the actor to the space selected by cursor if space is valid.
 	/// </summary>
 	void selectSpace ()
 	{
 		Loc cursorLoc = Cursor.current.loc;
 
-		bool spaceIsMarked = false;
+		// Determine which move gets actor to given position, if any
+		Move moveMade = null;
 		foreach (Move m in validMoves)
 			if (m.loc.Equals (cursorLoc))
-				spaceIsMarked = true;
+				moveMade = m;
 
-		if (spaceIsMarked && World.current.isAvailable (cursorLoc)) {
+		// Move actor to given space if possible
+		if ( moveMade != null ) {
+			// Move actor to cursor and reduce its mv by appropriate amount
+			actor.move(cursorLoc, mvConsumed: moveMade.mvConsumed);
+
+			// Cleanup
 			gameObject.renderer.material.color = Color.red;
-			actor.move(cursorLoc);
 			job = Job.SelectingActor;
-
 			// Remove all markers
 			foreach (GameObject o in markers)
 				Destroy(o);

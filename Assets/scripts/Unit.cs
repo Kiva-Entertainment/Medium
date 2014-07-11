@@ -97,10 +97,12 @@ public class Unit {
 	/// Precondition: Space must be valid.
 	/// Space should be on the ground for current map, so y must be raised from xz plane.
 	/// </summary>
-	public void move (Loc loc) {
+	public void move (Loc loc, int mvConsumed = 0) {
+		// Change the stored and real location of unit
 		this.loc = loc;
 		self.transform.position = World.current.onGround (loc);
-	}
 
-	public Loc getLoc () { return loc; }
+		// Consume movement
+		mvCur -= mvConsumed;
+	}
 }

@@ -40,7 +40,7 @@ public class World : MonoBehaviour {
 	/// <param name="l">Location to consider.</param>
 	public Unit getUnit (Loc l) {
 		foreach (Unit unit in units) {
-			if(unit.getLoc().Equals (l))
+			if(unit.loc.Equals (l))
 				return unit;
 		}
 
