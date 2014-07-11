@@ -53,12 +53,12 @@ public class CursorSelect : MonoBehaviour {
 			// Display spaces actor can move to
 			validMoves = MoveRange.determine(u);
 
-			foreach ( Move m in validMoves ) {
+			foreach ( Move move in validMoves ) {
 
 				// Add all appropriate markers and store them in a list so they can be removed later
 				markers.Add(
 					Object.Instantiate (Resources.Load ("marker"),
-										World.current.onGround(m.loc),
+										World.current.onGround(move.end),
 										Quaternion.identity) as GameObject);
 			}
 		}
@@ -72,15 +72,18 @@ public class CursorSelect : MonoBehaviour {
 		Loc cursorLoc = Cursor.current.loc;
 
 		// Determine which move gets actor to given position, if any
-		Move moveMade = null;
+		Move move = null;
 		foreach (Move m in validMoves)
-			if (m.loc.Equals (cursorLoc))
-				moveMade = m;
+			if (m.end.Equals (cursorLoc))
+				move = m;
 
 		// Move actor to given space if possible
-		if ( moveMade != null ) {
-			// Move actor to cursor and reduce its mv by appropriate amount
-			actor.move(cursorLoc, mvConsumed: moveMade.mvConsumed);
+		if ( move != null ) {
+
+			move.perform ();
+
+			// Record move in log
+			Log.current.push(move);
 
 			// Cleanup
 			gameObject.renderer.material.color = Color.red;
