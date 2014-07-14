@@ -54,7 +54,7 @@ public class Unit {
 				int strength = 100,
 				int toughness = 100,
 				int intelligence = 100,
-				int willpower = 100
+				int willpower = 100	            
 	           ) {
 		this.name = name;
 		this.type = type;
@@ -71,6 +71,10 @@ public class Unit {
 		this.toughness = toughness;
 		this.intelligence = intelligence;
 		this.willpower = willpower;
+
+		// TODO
+		skills = new Skill[] { new Slash () };
+
 	}
 
 	/// <summary>
