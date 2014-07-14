@@ -11,7 +11,8 @@ public class CursorSelect : MonoBehaviour {
 
 	// What the cursor is about to do.
 	enum Job {SelectingActor,
-			selectingSpace};
+			SelectingSpace,
+			SelectingSkill};
 
 	Job job = Job.SelectingActor;
 	Unit actor;
@@ -21,6 +22,10 @@ public class CursorSelect : MonoBehaviour {
 	/// Each update, if select button is pressed, do various form of selection based on current context.
 	/// </summary>
 	void Update () {
+		// Do nothing if unit menu is open
+		if (UnitMenu.current.isOpen)
+			return;
+
 		if (Input.GetButtonDown ("Select"))
 			select ();
 		else if (Input.GetButtonDown ("Deselect"))
@@ -33,8 +38,10 @@ public class CursorSelect : MonoBehaviour {
 			case Job.SelectingActor:
 				selectActor();
 				return;
-			case Job.selectingSpace:
+			case Job.SelectingSpace:
 				selectSpace();
+				return;
+			case Job.SelectingSkill:
 				return;
 		}
 	}
@@ -48,7 +55,7 @@ public class CursorSelect : MonoBehaviour {
 		if (u  != null) {
 			gameObject.renderer.material.color = Color.green;
 			actor = u;
-			job = Job.selectingSpace;
+			job = Job.SelectingSpace;
 
 			// Display spaces actor can move to
 			validMoves = MoveRange.determine(u);
@@ -113,6 +120,10 @@ public class CursorSelect : MonoBehaviour {
 	void openUnitMenu ()
 	{
 		UnitMenu.current.open (actor);
+
+		// Stop cursor from moving and selection from happening
+
+
 		gameObject.renderer.material.color = Color.blue;
 	}
 

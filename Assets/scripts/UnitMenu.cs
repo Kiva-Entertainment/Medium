@@ -4,16 +4,25 @@ using System.Collections.Generic;
 
 public class UnitMenu : MonoBehaviour {
 	public static UnitMenu current;
+	/// <summary>
+	/// If this unit menu is open currently.
+	/// Cursor movement/selection doesn't occur when menu is open.
+	/// </summary>
+	public bool isOpen { get; private set; }
+
 	private Unit actor;
 	
 	// Menu not active at game start
 	void Start () {
 		gameObject.SetActive (false);
+		isOpen = false;
+
 		current = this;
 	}
 
 	public void open (Unit unit) {
 		gameObject.SetActive (true);
+		isOpen = true;
 
 		actor = unit;
 
@@ -48,6 +57,7 @@ public class UnitMenu : MonoBehaviour {
 
 	void exit ()
 	{
+		isOpen = false;
 		gameObject.SetActive (false);
 		// Reactivate cursor
 	}

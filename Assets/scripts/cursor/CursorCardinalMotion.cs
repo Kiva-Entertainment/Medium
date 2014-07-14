@@ -15,6 +15,10 @@ public class CursorCardinalMotion : MonoBehaviour {
 	public float waitTime;
 	
 	void Update () {
+		// Do nothing if unit menu is open
+		if (UnitMenu.current.isOpen)
+			return;
+
 		// Potential change in location based on input
 		Loc dLoc = determineOffset ();
 
