@@ -71,27 +71,49 @@ public class CursorSelect : MonoBehaviour {
 	{
 		Loc cursorLoc = Cursor.current.loc;
 
+		// Open menu if actor was selected
+		if (cursorLoc.Equals (actor.loc))
+			openUnitMenu ();
+		else
+			potMoveActor (cursorLoc);
+	}
+
+	/// <summary>
+	/// Move actor to given location if move to location is valid.
+	/// </summary>
+	void potMoveActor (Loc targetLoc)
+	{
 		// Determine which move gets actor to given position, if any
 		Move move = null;
 		foreach (Move m in validMoves)
-			if (m.end.Equals (cursorLoc))
+			if (m.end.Equals (targetLoc))
 				move = m;
-
-		// Move actor to given space if possible
+		
+		// Move actor to given loc if a valid exists
 		if ( move != null ) {
-
+			
 			move.perform ();
-
+			
 			// Record move in log
 			Log.current.push(move);
-
+			
 			// Cleanup
 			gameObject.renderer.material.color = Color.red;
 			job = Job.SelectingActor;
+
 			// Remove all markers
 			foreach (GameObject o in markers)
 				Destroy(o);
 		}
+	}
+
+	/// <summary>
+	/// Open the unit menu for selected unit.
+	/// </summary>
+	void openUnitMenu ()
+	{
+		UnitMenu.current.open (actor);
+		gameObject.renderer.material.color = Color.blue;
 	}
 
 	void deselect ()

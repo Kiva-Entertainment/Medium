@@ -25,6 +25,8 @@ public class Unit {
 	public int intelligence { get; private set; }
 	public int willpower { get; private set; }
 
+	public Skill[] skills { get; private set; }
+
 	/// <summary>
 	/// Whether or not this unit is deployed, or the stats reference a theoretical unit.
 	/// </summary>
@@ -104,5 +106,13 @@ public class Unit {
 
 		// Consume movement
 		mvCur -= mvConsumed;
+	}
+
+	// Precondition - amount is at least zero
+	public void takeDamage (int amount) {
+		hpCur -= amount;
+
+		if (hpCur < 0)
+			hpCur = 0;
 	}
 }

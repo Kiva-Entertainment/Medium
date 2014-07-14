@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The world in which the current battle is taking place.
+/// Static world "current" has lots of information and utitlity necessary for scripts throughout project.
+/// </summary>
 public class World : MonoBehaviour {
+	/// <summary>
+	/// Singleton world which describes the state of things at the moment.
+	/// </summary>
 	public static World current;
-	public Map map;
-	public Unit[] units;
+	private Map map;
+	private Unit[] units;
 
 	void Awake () {
 		map = new Map ();
@@ -20,21 +27,31 @@ public class World : MonoBehaviour {
 			units[i].deploy(new Loc(i, i));
 		}
 	}
-	
-	public World () {
-		map = new Map ();
-	}
-	
+
+	/// <summary>
+	/// Check if given location is within the bounds of the current map.
+	/// </summary>
+	/// <returns><c>true</c>, if location is in bounds, <c>false</c> otherwise.</returns>
+	/// <param name="l">Location to check.</param>
 	public bool isInBounds (Loc l) {
 		return map.isInBounds (l);
 	}
 
-
+	/// <summary>
+	/// Get the height of a given space on the current map.
+	/// </summary>
+	/// <returns>The height of given location.</returns>
 	public float getHeight (Loc loc) { return map.getHeight (loc); }
+	/// <summary>
+	/// Get the height of a given space on the current map.
+	/// </summary>
+	/// <returns>The height of given location.</returns>
+	/// <param name="x">The x coordinate.</param>
+	/// <param name="z">The z coordinate.</param>
 	public float getHeight (int x, int z) { return getHeight (new Loc (x, z)); }
 
 	/// <summary>
-	/// Get unit in given location, or return null if no unit found/location is not in bounds.
+	/// Get the unit in given location, or return null if no unit found/location is not in bounds.
 	/// </summary>
 	/// <returns>The unit in given location.</returns>
 	/// <param name="l">Location to consider.</param>
@@ -48,14 +65,6 @@ public class World : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Check if given location is available for unit to move to.
-	/// Must both be empty and on map.
-	/// </summary>
-	public bool isAvailable (Loc l) {
-		return isInBounds (l) && !isHole(l) && getUnit (l) == null;
-	}
-
-	/// <summary>
 	/// For given location, return vector which is that locations position atop ground.
 	/// Effectively taking location, which is in xz plane, and projecting it such that it is atop ground.
 	/// </summary>
@@ -63,5 +72,10 @@ public class World : MonoBehaviour {
 		return l.asVect () + new Vector3(0, map.getHeight(l), 0);
 	}
 
+	/// <summary>
+	/// Check if given location on current map is a hole.
+	/// </summary>
+	/// <returns><c>true</c>, if location is a hole, <c>false</c> otherwise.</returns>
+	/// <param name="l">Location to check for hole status.</param>
 	public bool isHole (Loc l) { return map.isHole (l); }
 }

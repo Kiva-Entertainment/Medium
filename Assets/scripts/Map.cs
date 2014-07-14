@@ -29,11 +29,21 @@ public class Map {
 		x = gridArray.GetLength (0);
 		z = gridArray.GetLength (1);
 	}
-	
+
+	/// <summary>
+	/// Get the height of given location.
+	/// </summary>
+	/// <returns>Height of given location.</returns>
+	/// <param name="l">Location to check.</param>
 	public float getHeight (Loc l) {
 		return gridArray [l.x, l.z].height;
 	}
 
+	/// <summary>
+	/// Check if given location is within this maps bounds.
+	/// </summary>
+	/// <returns><c>true</c>, if location is in bounds, <c>false</c> otherwise.</returns>
+	/// <param name="l">Location to check.</param>
 	public bool isInBounds (Loc l) {
 		// Out of bounds if x/z is less than 0 or more than highest respective x/z
 		return !(l.x < 0 ||
@@ -42,5 +52,10 @@ public class Map {
 		         l.z > z - 1 );
 	}
 
+	/// <summary>
+	/// Check if this map has a hole at given location.
+	/// </summary>
+	/// <returns><c>true</c>, if there is a hole at given location, <c>false</c> otherwise.</returns>
+	/// <param name="l">Location to check.</param>
 	public bool isHole(Loc l) { return gridArray[l.x, l.z].isHole; }
 }

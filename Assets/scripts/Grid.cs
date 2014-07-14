@@ -3,7 +3,7 @@ using System.Collections;
 
 /// <summary>
 /// A single square on the field.
-/// Unless a hole, has height.
+/// Can be a hole.
 /// </summary>
 public class Grid {
 

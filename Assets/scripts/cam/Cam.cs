@@ -7,7 +7,7 @@ using System.Collections;
 public class Cam : MonoBehaviour {
 
 	/// <summary>
-	/// The main camera, which focuses on cursor.
+	/// The main camera, which focuses on subject.
 	/// </summary>
 	public static Cam main;
 
