@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Anything which does or can occupy a space on a map.
@@ -25,7 +26,7 @@ public class Unit {
 	public int intelligence { get; private set; }
 	public int willpower { get; private set; }
 
-	public Skill[] skills { get; private set; }
+	public LinkedList<Skill> skills { get; private set; }
 
 	/// <summary>
 	/// Whether or not this unit is deployed, or the stats reference a theoretical unit.
@@ -71,10 +72,12 @@ public class Unit {
 		this.toughness = toughness;
 		this.intelligence = intelligence;
 		this.willpower = willpower;
-
+		
 		// TODO
-		skills = new Skill[] { new Slash () };
-
+		skills = new LinkedList<Skill> ();
+		skills.AddLast (new Slash ());
+		skills.AddLast (new Slash1 ());
+		skills.AddLast (new Slash2 ());
 	}
 
 	/// <summary>
@@ -119,4 +122,17 @@ public class Unit {
 		if (hpCur < 0)
 			hpCur = 0;
 	}
+
+	public void cycleSkillsDown () {
+		// Add last at beginning, then remove last
+		skills.AddFirst (skills.Last.Value);
+		skills.RemoveLast ();
+	}
+
+	public void cycleSkillsUp () {
+		// Add first to end, then remove first
+		skills.AddLast (skills.First.Value);
+		skills.RemoveFirst ();
+	}
+
 }

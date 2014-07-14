@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UnitMenu : MonoBehaviour {
 	public static UnitMenu current;
@@ -16,8 +17,38 @@ public class UnitMenu : MonoBehaviour {
 
 		actor = unit;
 
-		gameObject.guiText.text = actor.skills[0].getName ();
-		// Determine list of valid actions
+		displaySkills ();
+	}
 
+	void displaySkills () {
+		string result = "";
+
+		foreach (Skill s in actor.skills) {
+			result += s.getName () + "\n";
+		}
+
+		gameObject.guiText.text = result;
+	}
+
+	void Update () {
+		if (Input.GetButtonDown ("Up")) {
+			actor.cycleSkillsUp ();
+			displaySkills ();
+
+		} else if (Input.GetButtonDown ("Down")) {
+			actor.cycleSkillsDown ();
+			displaySkills ();
+
+		} else if (Input.GetButtonDown ("Select")) {
+
+		} else if (Input.GetButtonDown ("Deselect")) {
+			exit ();
+		}
+	}
+
+	void exit ()
+	{
+		gameObject.SetActive (false);
+		// Reactivate cursor
 	}
 }
