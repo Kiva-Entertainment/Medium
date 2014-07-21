@@ -6,25 +6,42 @@ using System.Collections.Generic;
 /// Move the cursor in any of the 4 cardinal directions based on keyboard input
 /// </summary>
 public class CursorSelect : MonoBehaviour {
+	public static CursorSelect current { get; private set; }
 
-	List<GameObject> markers = new List<GameObject>();
+	List<GameObject> markers = new List<GameObject> ();
 
 	// What the cursor is about to do.
 	enum Job {SelectingActor,
 			SelectingSpace,
-			SelectingSkill};
+			SelectingSkill,
+			SelectingTarget};
 
 	Job job = Job.SelectingActor;
 	Unit actor;
 	Move[] validMoves;
+	/// <summary>
+	/// After unit menu is exited, should wait for a tic so that key presses while menu is open
+	/// are not observed and recponded to immediately.
+	/// </summary>
+	bool wait = false;
+
+	/// <summary>
+	/// The skill for which actor is performing and targets are being selected for.
+	/// </summary>
+	Skill currentSkill = null;
+
+	void Awake () {
+		current = this;
+	}
 
 	/// <summary>
 	/// Each update, if select button is pressed, do various form of selection based on current context.
 	/// </summary>
 	void Update () {
-		// Do nothing if unit menu is open
-		if (UnitMenu.current.isOpen)
+		if (wait) {
+			wait = true;
 			return;
+		}
 
 		if (Input.GetButtonDown ("Select"))
 			select ();
@@ -41,11 +58,29 @@ public class CursorSelect : MonoBehaviour {
 			case Job.SelectingSpace:
 				selectSpace();
 				return;
+			case Job.SelectingTarget:
+				selectTarget ();
+				return;
 			case Job.SelectingSkill:
 				return;
 		}
 	}
-	
+
+	public void unitMenuClosing (Skill selectedSkill) {
+		// Small wait should occur so that key input not observed immediately.
+		wait = true;
+
+		if (selectedSkill == null)
+			job = Job.SelectingSpace;
+		else {
+			job = Job.SelectingTarget;
+			currentSkill = selectedSkill;
+		}
+
+		// Either way, enable movement
+		GetComponent<CursorCardinalMotion> ().enabled = true;
+	}
+
 	/// <summary>
 	/// Select an actor to do things such as move, attack, inspect, etc.
 	/// </summary>
@@ -73,6 +108,7 @@ public class CursorSelect : MonoBehaviour {
 
 	/// <summary>
 	/// Move the actor to the space selected by cursor if space is valid.
+	/// If actor space is selected, open unit menu so actor can perform skill.
 	/// </summary>
 	void selectSpace ()
 	{
@@ -103,15 +139,24 @@ public class CursorSelect : MonoBehaviour {
 			
 			// Record move in log
 			Log.current.push(move);
-			
-			// Cleanup
-			gameObject.renderer.material.color = Color.red;
-			job = Job.SelectingActor;
 
 			// Remove all markers
 			foreach (GameObject o in markers)
 				Destroy(o);
+
+			// Reselect actor
+			job = Job.SelectingActor;
+			selectActor ();
 		}
+	}
+
+	/// <summary>
+	/// Selects the target.
+	/// </summary>
+	void selectTarget ()
+	{
+
+		throw new System.NotImplementedException ();
 	}
 
 	/// <summary>
@@ -121,15 +166,19 @@ public class CursorSelect : MonoBehaviour {
 	{
 		UnitMenu.current.open (actor);
 
-		// Stop cursor from moving and selection from happening
+		// disable movement while menu is open
+		GetComponent<CursorCardinalMotion> ().enabled = false;
 
-
+		// TODO remove scaffolding
 		gameObject.renderer.material.color = Color.blue;
 	}
 
 	void deselect ()
 	{
 		// TODO depend on context
+		if (job == Job.SelectingSkill)
+			return;
+
 		gameObject.renderer.material.color = Color.red;
 
 		job = Job.SelectingActor;
@@ -137,5 +186,9 @@ public class CursorSelect : MonoBehaviour {
 		// Remove all markers
 		foreach (GameObject o in markers)
 			Destroy(o);
+	}
+
+	public void close () {
+		deselect ();
 	}
 }

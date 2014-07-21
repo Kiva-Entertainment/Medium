@@ -16,6 +16,9 @@ public class Log : MonoBehaviour {
 		if ( !Input.GetButtonDown ("Undo") )
 			return;
 
+		// Deselect unit
+		CursorSelect.current.close ();
+
 		// If log is empty, return
 		Move m = pop ();
 		if (m == null)
@@ -30,7 +33,7 @@ public class Log : MonoBehaviour {
 		moves.Push (m);
 	}
 
-	Move pop ( ) {
+	Move pop () {
 		if (moves.Count == 0)
 			return null;
 		else
