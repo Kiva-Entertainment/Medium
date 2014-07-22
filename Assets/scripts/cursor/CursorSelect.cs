@@ -19,6 +19,7 @@ public class CursorSelect : MonoBehaviour {
 	Job job = Job.SelectingActor;
 	Unit actor;
 	Move[] validMoves;
+	Loc[] validTargets;
 	/// <summary>
 	/// After unit menu is exited, should wait for a tic so that key presses while menu is open
 	/// are not observed and recponded to immediately.
@@ -39,7 +40,7 @@ public class CursorSelect : MonoBehaviour {
 	/// </summary>
 	void Update () {
 		if (wait) {
-			wait = true;
+			wait = false;
 			return;
 		}
 
@@ -75,6 +76,21 @@ public class CursorSelect : MonoBehaviour {
 		else {
 			job = Job.SelectingTarget;
 			currentSkill = selectedSkill;
+
+			// Remove old markers, which indicated valid spaces to move to
+			foreach (GameObject o in markers)
+				Destroy(o);
+
+			// Add new markers
+			validTargets = selectedSkill.getValidTargets (actor);
+			foreach ( Loc target in validTargets ) {
+				
+				// Add all appropriate markers and store them in a list so they can be removed later
+				markers.Add(
+					Object.Instantiate (Resources.Load ("marker"),
+				                    World.current.onGround(target),
+				                    Quaternion.identity) as GameObject);
+			}
 		}
 
 		// Either way, enable movement
@@ -155,8 +171,17 @@ public class CursorSelect : MonoBehaviour {
 	/// </summary>
 	void selectTarget ()
 	{
+		bool canPerform = false;
+		foreach (Loc target in validTargets)
+			if (target.Equals(Cursor.current.loc))
+				canPerform = true;
 
-		throw new System.NotImplementedException ();
+		if (canPerform) {
+			currentSkill.perform(Cursor.current.loc);
+
+			// Skill has been performed, deselect actor
+			deselect ();
+		}
 	}
 
 	/// <summary>

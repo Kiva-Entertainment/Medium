@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using System.Collections.Generic;
+
+/// <summary>
 /// A skill is any skill performed by a unit.
 /// It contains data such as - Who performed it, Where they targetted, What choices they made
 /// </summary>
@@ -21,6 +23,8 @@ public interface Skill {
 	/// </summary>
 	int getRange ();
 
+	Loc[] getValidTargets (Unit actor);
+
 	// TODO add extent
 
 	/// <summary>
@@ -29,4 +33,6 @@ public interface Skill {
 	/// </summary>
 	/// <param name="locs">A list of the targets, ordered.</param>
 	void perform (params Loc[] locs);
+
+	void setTarget (Loc loc);
 }

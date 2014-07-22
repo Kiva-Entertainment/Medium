@@ -56,4 +56,9 @@ public class Loc : IEquatable<Loc> {
 	{
 		get { return new Loc (0, 0); }
 	}
+
+	public static Loc[] cardinals
+	{
+		get { return new Loc[4] {new Loc(1,0), new Loc(0,1), new Loc(-1,0), new Loc(0,-1)}; }
+	}
 }

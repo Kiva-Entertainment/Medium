@@ -76,8 +76,6 @@ public class Unit {
 		// TODO
 		skills = new LinkedList<Skill> ();
 		skills.AddLast (new Slash ());
-		skills.AddLast (new Slash1 ());
-		skills.AddLast (new Slash2 ());
 	}
 
 	/// <summary>
