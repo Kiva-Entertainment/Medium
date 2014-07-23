@@ -133,4 +133,8 @@ public class Unit {
 		skills.RemoveFirst ();
 	}
 
+	public void useAct (int amount = 1) {
+		actCur--;
+	}
+
 }

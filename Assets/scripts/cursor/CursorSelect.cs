@@ -177,7 +177,13 @@ public class CursorSelect : MonoBehaviour {
 				canPerform = true;
 
 		if (canPerform) {
-			currentSkill.perform(Cursor.current.loc);
+			currentSkill.perform (Cursor.current.loc);
+
+			// Decrement actors remaining act
+			actor.useAct ();
+
+			// TODO log should only clear for some skills
+			Log.current.clear ();
 
 			// Skill has been performed, deselect actor
 			deselect ();

@@ -39,4 +39,11 @@ public class Log : MonoBehaviour {
 		else
 			return moves.Pop ();
 	}
+
+	/// <summary>
+	/// Clear the log of moves.
+	/// </summary>
+	public void clear () {
+		moves = new Stack<Move> ();
+	}
 }

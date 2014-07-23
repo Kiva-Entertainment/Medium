@@ -43,7 +43,7 @@ public class UnitMenu : MonoBehaviour {
 			actor.cycleSkillsDown ();
 			displaySkills ();
 
-		} else if (Input.GetButtonDown ("Select")) {
+		} else if (Input.GetButtonDown ("Select") && actor.actCur > 0) {
 			select ();
 
 		} else if (Input.GetButtonDown ("Deselect")) {
