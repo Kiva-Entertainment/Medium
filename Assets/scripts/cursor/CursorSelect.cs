@@ -103,7 +103,9 @@ public class CursorSelect : MonoBehaviour {
 	void selectActor ()
 	{
 		Unit u = World.current.getUnit (Cursor.current.loc);
-		if (u  != null) {
+		// Only select if there is a unit in space and that unit acts this turn
+		if (u  != null && u.team == Clock.current.activeTeam) {
+
 			gameObject.renderer.material.color = Color.green;
 			actor = u;
 			job = Job.SelectingSpace;

@@ -11,7 +11,7 @@ public class World : MonoBehaviour {
 	/// </summary>
 	public static World current;
 	private Map map;
-	private Unit[] units;
+	public Unit[] units { get; private set; }
 
 	void Awake () {
 		map = new Map ();
@@ -21,7 +21,7 @@ public class World : MonoBehaviour {
 		units = new Unit[2];
 		for (int i = 0; i < units.Length; i++)
 		{
-			units[i] = new Unit(name: "Bob " + i, mvCur: 3);
+			units[i] = new Unit(name: "Bob " + i, mvCur: 3, team: i);
 
 			// Deploy unit
 			units[i].deploy(new Loc(i, i));

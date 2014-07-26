@@ -90,7 +90,7 @@ GameObject:
   - 114: {fileID: 353926144}
   - 114: {fileID: 353926145}
   m_Layer: 0
-  m_Name: cam
+  m_Name: Cam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,6 +305,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7affddd6d4746a3b255f9175723a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1006321142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1006321143}
+  - 114: {fileID: 1006321144}
+  m_Layer: 0
+  m_Name: Clock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1006321143
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006321142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.38418579e-06, y: -1.1920929e-06, z: -1.1920929e-06}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+--- !u!114 &1006321144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006321142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67081bca0549b42c4b6bd082ed4aa5f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1420730942
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +359,7 @@ GameObject:
   - 114: {fileID: 1420730947}
   - 114: {fileID: 1420730949}
   m_Layer: 0
-  m_Name: cursor
+  m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55779b45560a94b61b3afe8df4659778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: .100000001
+  waitTime: .129999995
 --- !u!114 &1420730949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +529,10 @@ Prefab:
     - target: {fileID: 400000, guid: f890566cfdc36434194ca5b57d2836bb, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f890566cfdc36434194ca5b57d2836bb, type: 3}
+      propertyPath: m_Name
+      value: Cursor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f890566cfdc36434194ca5b57d2836bb, type: 3}

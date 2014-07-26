@@ -25,6 +25,7 @@ public class Unit {
 	public int toughness { get; private set; }
 	public int intelligence { get; private set; }
 	public int willpower { get; private set; }
+	public float regen { get; private set; }
 
 	public LinkedList<Skill> skills { get; private set; }
 
@@ -40,6 +41,10 @@ public class Unit {
 	/// If deployed, the current location of this unit.
 	/// </summary>
 	public Loc loc { get; private set; }
+	/// <summary>
+	/// The id of the team which unit is on currently.
+	/// </summary>
+	public int team { get; private set; }
 
 	public Unit (string name = "Bob",
 				string type = "Soldier",
@@ -55,7 +60,9 @@ public class Unit {
 				int strength = 100,
 				int toughness = 100,
 				int intelligence = 100,
-				int willpower = 100	            
+				int willpower = 100,
+				float regen = 0.1f,
+				int team = 0
 	           ) {
 		this.name = name;
 		this.type = type;
@@ -72,6 +79,9 @@ public class Unit {
 		this.toughness = toughness;
 		this.intelligence = intelligence;
 		this.willpower = willpower;
+		this.regen = regen;
+
+		this.team = team;
 		
 		// TODO
 		skills = new LinkedList<Skill> ();
@@ -111,6 +121,18 @@ public class Unit {
 
 		// Consume movement
 		mvCur -= mvConsumed;
+	}
+
+	/// <summary>
+	/// Refresh this unit, called when unit's turn is over.
+	/// </summary>
+	public void refresh () {
+		actCur = actMax;
+		mvCur = mvMax;
+
+		spCur += Mathf.RoundToInt ( spMax * regen );
+		if (spCur > spMax)
+			spCur = spMax;
 	}
 
 	// Precondition - amount is at least zero
