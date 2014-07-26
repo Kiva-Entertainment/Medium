@@ -18,7 +18,7 @@ public class Unit {
 	public int actMax { get; private set; }
 	public int actCur { get; private set; }
 	public int mvMax { get; private set; }
-	public int mvCur { get; private set; }
+	public int mvCur { get; set; }
 	public float jump { get; private set; }
 
 	public int strength { get; private set; }
@@ -86,6 +86,7 @@ public class Unit {
 		// TODO
 		skills = new LinkedList<Skill> ();
 		skills.AddLast (new Slash ());
+		skills.AddLast (new Dash ());
 	}
 
 	/// <summary>

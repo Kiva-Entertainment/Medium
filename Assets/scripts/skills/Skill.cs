@@ -33,6 +33,4 @@ public interface Skill {
 	/// </summary>
 	/// <param name="locs">A list of the targets, ordered.</param>
 	void perform (params Loc[] locs);
-
-	void setTarget (Loc loc);
 }

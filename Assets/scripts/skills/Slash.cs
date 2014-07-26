@@ -12,7 +12,6 @@ public class Slash : Skill {
 		Unit u = World.current.getUnit (locs [0]);
 		if (u != null) {
 			u.takeDamage (10);
-			Debug.Log (u.hpCur);
 		}
 	}
 
@@ -28,8 +27,4 @@ public class Slash : Skill {
 		return result.ToArray ();
 	}
 
-	// TODO remove maybe idk
-	public void setTarget (Loc loc) {
-
-	}
 }
