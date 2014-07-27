@@ -270,7 +270,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!132 &583718107
 GUIText:
   m_ObjectHideFlags: 0
@@ -358,6 +358,7 @@ GameObject:
   - 114: {fileID: 1420730948}
   - 114: {fileID: 1420730947}
   - 114: {fileID: 1420730949}
+  - 114: {fileID: 1420730950}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -421,7 +422,7 @@ Transform:
   m_Children:
   - {fileID: 353926142}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &1420730947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +455,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f91f9de8e9654fe183178c61010bb1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1420730950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420730942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fef0c06fb0b744c29f343e1c06b7e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1550649490

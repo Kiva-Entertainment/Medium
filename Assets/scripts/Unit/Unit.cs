@@ -47,7 +47,7 @@ public class Unit {
 	public int team { get; private set; }
 
 	public Unit (string name = "Bob",
-				string type = "Soldier",
+				string type = "Golem",
 				int hpMax = 100,
 				int hpCur = 100,
 				int spMax = 100,
@@ -85,21 +85,16 @@ public class Unit {
 		
 		// TODO
 		skills = new LinkedList<Skill> ();
-		skills.AddLast (new Slash ());
+		skills.AddLast (new Punch (this));
 		skills.AddLast (new Dash ());
 	}
-
-	/// <summary>
-	/// Returns true if unit is currently deployed to the field.
-	/// </summary>
-	public bool isDeployed () { return deployed; }
 
 	/// <summary>
 	/// Deploy this unit to a given location on the map.
 	/// </summary>
 	/// <param name="loc">The location that the unit is being deployed to.</param>
 	public void deploy (Loc loc) {
-		if ( isDeployed () )
+		if ( deployed )
 			throw new System.Exception("Unit you attempted to deploy is already deployed");
 
 		// Make an object of unit's type at origin, then move it to current loc
@@ -142,6 +137,9 @@ public class Unit {
 
 		if (hpCur < 0)
 			hpCur = 0;
+
+		// Play effects
+		playAnim ("hit");
 	}
 
 	public void cycleSkillsDown () {
@@ -158,6 +156,20 @@ public class Unit {
 
 	public void useAct (int amount = 1) {
 		actCur--;
+	}
+
+	/// <summary>
+	/// One time play the animation with given name.
+	/// Animation must exist!!!
+	/// </summary>
+	/// <param name="anim">Name of animation to play once.</param>
+	public void playAnim (string animName) {
+		Animation anim = self.GetComponent<Animation> ();
+
+		anim[animName].wrapMode = WrapMode.Once;
+		anim.Play (animName);
+
+		anim.PlayQueued ("idle");
 	}
 
 }
