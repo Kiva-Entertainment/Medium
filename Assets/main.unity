@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDist: 14
-  minDist: 3
-  distIncrement: 6
+  minDist: 2.29999995
+  distIncrement: 12
 --- !u!114 &353926145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55779b45560a94b61b3afe8df4659778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: .129999995
+  waitTime: .100000001
 --- !u!114 &1420730949
 MonoBehaviour:
   m_ObjectHideFlags: 0
