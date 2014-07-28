@@ -16,7 +16,7 @@ public class Unit {
 	public int spCur { get; private set; }
 
 	public int actMax { get; private set; }
-	public int actCur { get; private set; }
+	public int actCur;
 	public int mvMax { get; private set; }
 	public int mvCur { get; set; }
 	public float jump { get; private set; }
@@ -32,7 +32,7 @@ public class Unit {
 	/// <summary>
 	/// Whether or not this unit is deployed, or the stats reference a theoretical unit.
 	/// </summary>
-	bool deployed = false;
+	public bool deployed { get; private set; }
 	/// <summary>
 	/// The game object which represents this unit, is none if not deployed.
 	/// </summary>
@@ -82,6 +82,7 @@ public class Unit {
 		this.regen = regen;
 
 		this.team = team;
+		deployed = false;
 		
 		// TODO
 		skills = new LinkedList<Skill> ();
@@ -135,11 +136,28 @@ public class Unit {
 	public void takeDamage (int amount) {
 		hpCur -= amount;
 
-		if (hpCur < 0)
-			hpCur = 0;
+		if (hpCur <= 0) {
+			die ();
+			return;
+		}
 
 		// Play effects
 		playAnim ("hit");
+	}
+
+	/// <summary>
+	/// Unit dies.
+	/// </summary>
+	void die ()
+	{
+		playAnim ("death");
+
+		// TODO unit should actually die
+		float length = 1.400f;
+		GameObject.Destroy (self, length);
+
+		deployed = false;
+		loc = null;
 	}
 
 	public void cycleSkillsDown () {
@@ -152,10 +170,6 @@ public class Unit {
 		// Add first to end, then remove first
 		skills.AddLast (skills.First.Value);
 		skills.RemoveFirst ();
-	}
-
-	public void useAct (int amount = 1) {
-		actCur--;
 	}
 
 	/// <summary>

@@ -20,7 +20,7 @@ public class Punch : Skill {
 		// exception handling here
 		Unit u = World.current.getUnit (locs [0]);
 		if (u != null) {
-			u.takeDamage (10);
+			u.takeDamage (100);
 		}
 	}
 	

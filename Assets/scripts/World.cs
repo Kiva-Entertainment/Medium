@@ -57,8 +57,9 @@ public class World : MonoBehaviour {
 	/// <param name="l">Location to consider.</param>
 	public Unit getUnit (Loc l) {
 		foreach (Unit unit in units) {
-			if(unit.loc.Equals (l))
-				return unit;
+			if (unit.deployed)
+				if (unit.loc.Equals (l))
+					return unit;
 		}
 
 		return null;
