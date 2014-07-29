@@ -18,10 +18,10 @@ public class World : MonoBehaviour {
 		current = this;
 
 		// TODO(kgeffen) Unit data should be imported from json or something
-		units = new Unit[2];
+		units = new Unit[4];
 		for (int i = 0; i < units.Length; i++)
 		{
-			units[i] = new Unit(name: "Bob " + i, mvCur: 3, team: i);
+			units[i] = new Unit(name: "Bob " + i, team: i % 2);
 
 			// Deploy unit
 			units[i].deploy(new Loc(i, i));
@@ -56,11 +56,11 @@ public class World : MonoBehaviour {
 	/// <returns>The unit in given location.</returns>
 	/// <param name="l">Location to consider.</param>
 	public Unit getUnit (Loc l) {
-		foreach (Unit unit in units) {
+
+		foreach (Unit unit in units)
 			if (unit.deployed)
 				if (unit.loc.Equals (l))
 					return unit;
-		}
 
 		return null;
 	}
