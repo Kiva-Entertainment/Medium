@@ -19,7 +19,7 @@ public class CursorSelect : MonoBehaviour {
 	Job job = Job.SelectingActor;
 	Unit actor;
 	Move[] validMoves;
-	Loc[] validTargets;
+	Loc[] skillRange;
 	/// <summary>
 	/// After unit menu is exited, should wait for a tic so that key presses while menu is open
 	/// are not observed and recponded to immediately.
@@ -82,8 +82,8 @@ public class CursorSelect : MonoBehaviour {
 				Destroy(o);
 
 			// Add new markers
-			validTargets = selectedSkill.getValidTargets (actor);
-			foreach ( Loc target in validTargets ) {
+			skillRange = selectedSkill.getRange (onlyValid: false);
+			foreach ( Loc target in skillRange ) {
 				
 				// Add all appropriate markers and store them in a list so they can be removed later
 				markers.Add(
@@ -173,6 +173,8 @@ public class CursorSelect : MonoBehaviour {
 	/// </summary>
 	void selectTarget ()
 	{
+		Loc[] validTargets = actor.skills.First.Value.getRange (onlyValid: true);
+
 		bool canPerform = false;
 		foreach (Loc target in validTargets)
 			if (target.Equals(Cursor.current.loc))

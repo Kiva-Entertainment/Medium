@@ -17,15 +17,25 @@ public interface Skill {
 	/// How many targets this skill demands.
 	/// A target is a location of the current map.
 	/// </summary>
-	int getNumTargets ();
+	//int getNumTargets ();
 	/// <summary>
 	/// How far from actor this skill can target.
 	/// </summary>
-	int getRange ();
+	//int getRange ();
 
-	Loc[] getValidTargets (Unit actor);
+	/// <summary>
+	/// Get a list of all locations that skill could be performed on.
+	/// </summary>
+	/// <returns>List of locations skill can target.</returns>
+	/// <param name="onlyValid">
+	/// If set to <c>true</c> only valid spaces are returned.
+	/// For example, punch can hit adjacent space, but space is not valid if it is empty.
+	/// </param>
+	Loc[] getRange (bool onlyValid = false);
 
 	// TODO add extent
+
+	Skill setActor (Unit u);
 
 	/// <summary>
 	/// Perform the given skill with targets at given locations.

@@ -83,11 +83,8 @@ public class Unit {
 
 		this.team = team;
 		deployed = false;
-		
-		// TODO
+
 		skills = new LinkedList<Skill> ();
-		skills.AddLast (new Punch (this));
-		skills.AddLast (new Dash ());
 	}
 
 	/// <summary>
@@ -152,7 +149,6 @@ public class Unit {
 	{
 		playAnim ("death");
 
-		// TODO unit should actually die
 		float length = 1.400f;
 		GameObject.Destroy (self, length);
 
@@ -184,6 +180,10 @@ public class Unit {
 		anim.Play (animName);
 
 		anim.PlayQueued ("idle");
+	}
+
+	public void addSkill (Skill skill) {
+		skills.AddLast (skill);
 	}
 
 }

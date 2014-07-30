@@ -1,36 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Punch : Skill {
+public class Punch : BasicSkill {
 
-	private Unit actor;
-
-	public int getCost () { return 0; }
-	public string getName () { return "Punch"; }
-	public int getNumTargets () { return 1; }
-	public int getRange () { return 1; }
-
-	public Punch (Unit actor) {
-		this.actor = actor;
-	}
+	public override int getCost () { return 0; }
+	public override string getName () { return "Punch"; }
 	
-	public void perform (params Loc[] locs) {
+	public override void perform (params Loc[] locs) {
 		actor.playAnim ("punch");
 
-		// exception handling here
 		Unit u = World.current.getUnit (locs [0]);
 		if (u != null) {
 			u.takeDamage (100);
 		}
 	}
 	
-	public Loc[] getValidTargets (Unit actor) {
+	public override Loc[] getRange (bool onlyValid) {
 		List<Loc> result = new List<Loc> ();
 		
 		foreach (Loc offset in Loc.cardinals) {
 			Loc potLoc = actor.loc.plus (offset);
-			if (World.current.isInBounds(potLoc))
-				result.Add (potLoc);
+
+			if (!World.current.isInBounds(potLoc))
+				continue;
+
+			// These are requirements for space range
+			// When checking if valid, must also ensure that space is occupied
+			if (!onlyValid) {
+				result.Add(potLoc);
+				continue;
+			}
+
+			if (World.current.getUnit(potLoc) == null)
+				continue;
+				
+			result.Add(potLoc);
 		}
 		
 		return result.ToArray ();
