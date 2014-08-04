@@ -33,7 +33,9 @@ public interface Skill {
 	/// </param>
 	Loc[] getRange (bool onlyValid = false);
 
-	// TODO add extent
+	int getExtent ();
+	void raiseExtent ();
+	void lowerExtent ();
 
 	Skill setActor (Unit u);
 

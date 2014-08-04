@@ -179,11 +179,15 @@ public class CursorSelect : MonoBehaviour {
 		foreach (Loc target in validTargets)
 			if (target.Equals(Cursor.current.loc))
 				canPerform = true;
+		if (actor.spCur < currentSkill.getCost ())
+			canPerform = false;
 
 		if (canPerform) {
 			currentSkill.perform (Cursor.current.loc);
 
 			actor.actCur--;
+
+			actor.spCur -= currentSkill.getCost ();
 
 			// TODO log should only clear for some skills
 			Log.current.clear ();

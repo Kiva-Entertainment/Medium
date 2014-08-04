@@ -10,16 +10,16 @@ public class Unit {
 	public string name { get; private set; }
 	public string type { get; private set; }
 
-	public int hpMax { get; private set; }
-	public int hpCur { get; private set; }
-	public int spMax { get; private set; }
-	public int spCur { get; private set; }
+	public int hpMax;
+	public int hpCur;
+	public int spMax;
+	public int spCur;
 
-	public int actMax { get; private set; }
+	public int actMax;
 	public int actCur;
-	public int mvMax { get; private set; }
-	public int mvCur { get; set; }
-	public float jump { get; private set; }
+	public int mvMax;
+	public int mvCur;
+	public float jump;
 
 	public int strength { get; private set; }
 	public int toughness { get; private set; }

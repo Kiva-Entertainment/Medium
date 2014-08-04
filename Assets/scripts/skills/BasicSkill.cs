@@ -9,6 +9,12 @@ public abstract class BasicSkill : Skill {
 		return this;
 	}
 
+	protected int extent;
+
+	public int getExtent () { return extent; }
+	public void raiseExtent () { extent++; }
+	public void lowerExtent () { extent--; }
+
 	public abstract int getCost ();
 	public abstract string getName ();
 	//public abstract int getNumTargets ();

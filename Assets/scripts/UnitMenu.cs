@@ -27,6 +27,10 @@ public class UnitMenu : MonoBehaviour {
 	void displaySkills () {
 		string result = "";
 
+		// TODO change this to be prettier
+		result += actor.skills.First.Value.getExtent () + " | ";
+		result += actor.skills.First.Value.getCost () + " ";
+
 		foreach (Skill s in actor.skills) {
 			result += s.getName () + "\n";
 		}
@@ -48,6 +52,14 @@ public class UnitMenu : MonoBehaviour {
 
 		} else if (Input.GetButtonDown ("Deselect")) {
 			exit ();
+
+		} else if (Input.GetButtonDown ("RaiseExtent")) {
+			actor.skills.First.Value.raiseExtent ();
+			displaySkills ();
+
+		} else if (Input.GetButtonDown ("LowerExtent")) {
+			actor.skills.First.Value.lowerExtent ();
+			displaySkills ();
 		}
 	}
 

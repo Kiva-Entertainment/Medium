@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Punch : BasicSkill {
 
-	public override int getCost () { return 0; }
+	public override int getCost () { return 0 + 3 * extent; }
 	public override string getName () { return "Punch"; }
 	
 	public override void perform (params Loc[] locs) {
@@ -11,7 +11,7 @@ public class Punch : BasicSkill {
 
 		Unit u = World.current.getUnit (locs [0]);
 		if (u != null) {
-			u.takeDamage (100);
+			u.takeDamage (100 + 10 * extent);
 		}
 	}
 	
