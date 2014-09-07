@@ -6,6 +6,12 @@ using System.Collections;
 /// </summary>
 public class CamRotate : MonoBehaviour {
 	/// <summary>
+	/// Whether the camera can rotate currently.
+	/// When unit menu is open, camera cannot rotate, for example
+	/// </summary>
+	public static bool able = true;
+
+	/// <summary>
 	/// Number of seconds for slow rotation to finish half of desired rotation.
 	/// In other words, half life of (rotation left to occur).
 	/// Lower number means jerkier camera movement, higher means 'lazier' camera rotation.
@@ -25,6 +31,7 @@ public class CamRotate : MonoBehaviour {
 	/// </summary>
 	public void Update ()
 	{
+		if (!able) return;
 		// Update the perspective and the remaining rotation based on keypresses
 		updateState ();
 		performRotation ();

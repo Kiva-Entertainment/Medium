@@ -17,6 +17,8 @@ public class UnitMenu : MonoBehaviour {
 	/// </summary>
 	/// <param name="unit">The unit menu is being opened for.</param>
 	public void open (Unit unit) {
+		CamRotate.able = false;
+
 		gameObject.SetActive (true);
 
 		actor = unit;
@@ -28,8 +30,8 @@ public class UnitMenu : MonoBehaviour {
 		string result = "";
 
 		// TODO change this to be prettier
-		result += actor.skills.First.Value.getExtent () + " | ";
-		result += actor.skills.First.Value.getCost () + " ";
+		result += getCurSkill ().getExtent () + " | ";
+		result += getCurSkill ().getCost () + " ";
 
 		foreach (Skill s in actor.skills) {
 			result += s.getName () + "\n";
@@ -47,34 +49,43 @@ public class UnitMenu : MonoBehaviour {
 			actor.cycleSkillsDown ();
 			displaySkills ();
 
-		} else if (Input.GetButtonDown ("Select") && actor.actCur > 0) {
+		} else if (Input.GetButtonDown ("Select")) {
 			select ();
 
 		} else if (Input.GetButtonDown ("Deselect")) {
 			exit ();
 
 		} else if (Input.GetButtonDown ("RaiseExtent")) {
-			actor.skills.First.Value.raiseExtent ();
+			getCurSkill ().raiseExtent ();
 			displaySkills ();
 
 		} else if (Input.GetButtonDown ("LowerExtent")) {
-			actor.skills.First.Value.lowerExtent ();
+			getCurSkill ().lowerExtent ();
 			displaySkills ();
 		}
 	}
 
 	/// <summary>
-	/// Select the skill viewed currently.
+	/// Select the skill viewed currently and exit the unit menu.
 	/// </summary>
 	void select ()
 	{
-		CursorSelect.current.unitMenuClosing (actor.skills.First.Value);
+		exit (skill: getCurSkill() );
+	}
+
+	/// <summary>
+	/// Close the unit menu and signal that given skill was selected.
+	/// </summary>
+	/// <param name="skill">The skill selected.</param>
+	void exit (Skill skill = null)
+	{
+		// Enable camera rotation
+		CamRotate.able = true;
+
+		CursorSelect.current.unitMenuClosing (skill);
 		gameObject.SetActive (false);
 	}
 
-	void exit ()
-	{
-		CursorSelect.current.unitMenuClosing (null);
-		gameObject.SetActive (false);
-	}
+	// Utility method for this script, gets the skill currently selected
+	Skill getCurSkill () { return actor.skills.First.Value; }
 }

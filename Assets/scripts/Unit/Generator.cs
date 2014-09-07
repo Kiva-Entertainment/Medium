@@ -17,7 +17,7 @@ public static class Generator {
 								hpMax: 120,
 								hpCur: 120,
 								spMax: 80,
-								spCur: 80,
+								spCur: 0,
 		                        mvMax: 4,
 		                        mvCur: 4,
 		                        jump: 0.4f,

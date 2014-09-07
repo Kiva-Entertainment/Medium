@@ -13,7 +13,7 @@ public abstract class BasicSkill : Skill {
 
 	public int getExtent () { return extent; }
 	public void raiseExtent () { extent++; }
-	public void lowerExtent () { extent--; }
+	public void lowerExtent () { if(extent > 0) extent--; }
 
 	public abstract int getCost ();
 	public abstract string getName ();

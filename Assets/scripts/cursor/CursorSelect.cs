@@ -179,6 +179,8 @@ public class CursorSelect : MonoBehaviour {
 		foreach (Loc target in validTargets)
 			if (target.Equals(Cursor.current.loc))
 				canPerform = true;
+		if (actor.actCur < 1)
+			canPerform = false;
 		if (actor.spCur < currentSkill.getCost ())
 			canPerform = false;
 
@@ -194,6 +196,9 @@ public class CursorSelect : MonoBehaviour {
 
 			// Skill has been performed, deselect actor
 			deselect ();
+		} else {
+			AudioControl.current.play(Sound.negative);
+
 		}
 	}
 
