@@ -38,18 +38,18 @@ public static class Generator {
 		                        type: "Base",
 		                        hpMax: 120,
 		                        hpCur: 120,
-		                        spMax: 80,
+		                        spMax: 0,
 		                        spCur: 0,
-		                        mvMax: 4,
-		                        mvCur: 4,
-		                        jump: 0.4f,
-		                        strength: 120,
-		                        toughness: 140,
-		                        intelligence: 60,
-		                        willpower: 80,
-		                        regen: 0.12f,
+		                        mvMax: 0,
+		                        mvCur: 0,
+		                        jump: 0.0f,
+		                        strength: 0,
+		                        toughness: 10,
+		                        intelligence: 0,
+		                        willpower: 0,
+		                        regen: 0.0f,
 		                        team: team);
-		//result.addSkill (new Punch().setActor(result));
+		result.addSkill (new Deploy().setActor(result));
 		//result.addSkill (new Dash().setActor(result));
 		
 		return result;

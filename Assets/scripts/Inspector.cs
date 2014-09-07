@@ -25,7 +25,7 @@ public class Inspector : MonoBehaviour {
 	/// </summary>
 	void inspect ()
 	{
-		Unit u = World.current.getUnit (Cursor.current.loc);
+		Unit u = Unit.get (Cursor.current.loc);
 		if (u != null) {
 			string result = 
 					u.name +

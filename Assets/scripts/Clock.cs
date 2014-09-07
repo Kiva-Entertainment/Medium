@@ -31,11 +31,7 @@ public class Clock : MonoBehaviour {
 		// DO not allow undos of previous turn
 		Log.current.clear ();
 
-		foreach (Unit unit in World.current.units) {
-			if (unit.team == activeTeam) {
-				unit.refresh ();
-			}
-		}
+		Unit.refreshTeam (team: activeTeam);
 
 		// TODO Add support for more than 2 teams
 		if (activeTeam == 0)

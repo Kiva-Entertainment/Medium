@@ -7,6 +7,12 @@ using System.Collections.Generic;
 /// Such as: A barrel, a wizard, a bear.
 /// </summary>
 public class Unit {
+	/// <summary>
+	/// A list of all units currently deployed.
+	/// Used internally to find units in given locations.
+	/// </summary>
+	private static List<Unit> activeUnits = new List<Unit> ();
+
 	public string name { get; private set; }
 	public string type { get; private set; }
 
@@ -102,6 +108,8 @@ public class Unit {
 		self.transform.Rotate (Vector3.up, 180 * team);
 		move (loc);
 		deployed = true;
+
+		activeUnits.Add (this);
 	}
 
 	/// <summary>
@@ -155,6 +163,8 @@ public class Unit {
 
 		deployed = false;
 		loc = null;
+
+		activeUnits.Remove (this);
 	}
 
 	public void cycleSkillsDown () {
@@ -187,4 +197,30 @@ public class Unit {
 		skills.AddLast (skill);
 	}
 
+	/// <summary>
+	/// Get the unit in given location, or return null if none found.
+	/// Location can be outside of bounds, but null will be returned.
+	/// </summary>
+	/// <returns>The unit in given location.</returns>
+	/// <param name="l">Location to consider.</param>
+	public static Unit get(Loc loc) {
+		foreach (Unit unit in activeUnits)
+			if (unit.deployed)
+				if (unit.loc.Equals (loc))
+					return unit;
+		
+		return null;
+	}
+
+	/// <summary>
+	/// Refresh all units on given team.
+	/// </summary>
+	/// <param name="team">ID of team to refresh.</param>
+	public static void refreshTeam(int team) {
+		foreach (Unit unit in activeUnits) {
+			if (unit.team == team) {
+				unit.refresh ();
+			}
+		}
+	}
 }

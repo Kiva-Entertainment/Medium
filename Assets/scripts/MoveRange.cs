@@ -91,7 +91,7 @@ public class MoveRange {
 			return false;
 
 		// Check that is not occupied already
-		if ( World.current.getUnit(move.end) != null )
+		if ( Unit.get (move.end) != null )
 			return false;
 
 		// Check that height is not too great

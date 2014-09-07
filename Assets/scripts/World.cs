@@ -11,20 +11,19 @@ public class World : MonoBehaviour {
 	/// </summary>
 	public static World current;
 	private Map map;
-	public Unit[] units { get; private set; }
 
 	void Awake () {
 		map = new Map ();
 		current = this;
 
 		// TODO(kgeffen) Unit data should be imported from json or something
-		units = new Unit[4];
+		Unit[] units = new Unit[2];
 		for (int i = 0; i < units.Length; i++)
 		{
 			units[i] = Generator.getBase(i%2);
 
 			// Deploy unit
-			units[i].deploy(new Loc(i, i));
+			units[i].deploy(new Loc(i * 2, i * 2));
 		}
 	}
 
@@ -49,21 +48,6 @@ public class World : MonoBehaviour {
 	/// <param name="x">The x coordinate.</param>
 	/// <param name="z">The z coordinate.</param>
 	public float getHeight (int x, int z) { return getHeight (new Loc (x, z)); }
-
-	/// <summary>
-	/// Get the unit in given location, or return null if no unit found/location is not in bounds.
-	/// </summary>
-	/// <returns>The unit in given location.</returns>
-	/// <param name="l">Location to consider.</param>
-	public Unit getUnit (Loc l) {
-
-		foreach (Unit unit in units)
-			if (unit.deployed)
-				if (unit.loc.Equals (l))
-					return unit;
-
-		return null;
-	}
 
 	/// <summary>
 	/// For given location, return vector which is that locations position atop ground.

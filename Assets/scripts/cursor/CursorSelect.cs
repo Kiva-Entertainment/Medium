@@ -102,7 +102,7 @@ public class CursorSelect : MonoBehaviour {
 	/// </summary>
 	void selectActor ()
 	{
-		Unit u = World.current.getUnit (Cursor.current.loc);
+		Unit u = Unit.get (Cursor.current.loc);
 		// Only select if there is a unit in space and that unit acts this turn
 		if (u  != null && u.team == Clock.current.activeTeam) {
 
@@ -179,6 +179,7 @@ public class CursorSelect : MonoBehaviour {
 		foreach (Loc target in validTargets)
 			if (target.Equals(Cursor.current.loc))
 				canPerform = true;
+		Debug.Log (validTargets);
 		if (actor.actCur < 1)
 			canPerform = false;
 		if (actor.spCur < currentSkill.getCost ())
