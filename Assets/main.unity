@@ -270,7 +270,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!132 &583718107
 GUIText:
   m_ObjectHideFlags: 0
@@ -665,7 +665,7 @@ GameObject:
   - 4: {fileID: 1782403954}
   - 114: {fileID: 1782403953}
   m_Layer: 0
-  m_Name: world
+  m_Name: World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,4 +767,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1

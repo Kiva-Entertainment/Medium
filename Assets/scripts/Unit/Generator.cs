@@ -33,7 +33,27 @@ public static class Generator {
 		return result;
 	}
 
-
+	public static Unit getBase (int team = 0) {
+		Unit result = new Unit (name: "Base",
+		                        type: "Base",
+		                        hpMax: 120,
+		                        hpCur: 120,
+		                        spMax: 80,
+		                        spCur: 0,
+		                        mvMax: 4,
+		                        mvCur: 4,
+		                        jump: 0.4f,
+		                        strength: 120,
+		                        toughness: 140,
+		                        intelligence: 60,
+		                        willpower: 80,
+		                        regen: 0.12f,
+		                        team: team);
+		//result.addSkill (new Punch().setActor(result));
+		//result.addSkill (new Dash().setActor(result));
+		
+		return result;
+	}
 
 
 
