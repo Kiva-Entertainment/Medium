@@ -97,7 +97,8 @@ public class Unit {
 	/// Deploy this unit to a given location on the map.
 	/// </summary>
 	/// <param name="loc">The location that the unit is being deployed to.</param>
-	public void deploy (Loc loc) {
+	/// <param name="ready">If the unit is ready to act upon being deployed.</param>
+	public void deploy (Loc loc, bool ready = false) {
 		if ( deployed )
 			throw new System.Exception("Unit you attempted to deploy is already deployed");
 
@@ -108,6 +109,9 @@ public class Unit {
 		self.transform.Rotate (Vector3.up, 180 * team);
 		move (loc);
 		deployed = true;
+
+		if (!ready)
+			actCur = mvCur = 0;
 
 		activeUnits.Add (this);
 	}

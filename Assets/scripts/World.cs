@@ -23,7 +23,7 @@ public class World : MonoBehaviour {
 			units[i] = Generator.getBase(i%2);
 
 			// Deploy unit
-			units[i].deploy(new Loc(i * 2, i * 2));
+			units[i].deploy(new Loc(i * 2, i * 2), ready: true);
 		}
 	}
 
