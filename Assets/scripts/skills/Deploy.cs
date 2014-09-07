@@ -7,7 +7,7 @@ public class Deploy : BasicSkill {
 	public override string getName () { return "Deploy"; }
 	
 	public override void perform (params Loc[] locs) {
-		Generator.getGolem(team: actor.team).deploy(locs[0]);
+		new Golem (team: actor.team).deploy (locs [0]);
 	}
 	
 	public override Loc[] getRange (bool onlyValid) {

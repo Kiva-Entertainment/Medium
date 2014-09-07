@@ -90,7 +90,7 @@ public class Unit {
 		this.team = team;
 		deployed = false;
 
-		skills = new LinkedList<Skill> ();
+		this.skills = new LinkedList<Skill> ();
 	}
 
 	/// <summary>

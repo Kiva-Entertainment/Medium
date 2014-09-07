@@ -20,7 +20,7 @@ public class World : MonoBehaviour {
 		Unit[] units = new Unit[2];
 		for (int i = 0; i < units.Length; i++)
 		{
-			units[i] = Generator.getBase(i%2);
+			units[i] = new Base(team: i % 2);
 
 			// Deploy unit
 			units[i].deploy(new Loc(i * 2, i * 2), ready: true);
