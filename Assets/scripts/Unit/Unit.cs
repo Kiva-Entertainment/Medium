@@ -99,6 +99,7 @@ public class Unit {
 		self = Object.Instantiate (Resources.Load (type),
 									Vector3.zero,
 									Quaternion.identity) as GameObject;
+		self.transform.Rotate (Vector3.up, 180 * team);
 		move (loc);
 		deployed = true;
 	}
