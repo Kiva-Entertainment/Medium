@@ -160,10 +160,11 @@ public class Unit {
 	/// </summary>
 	void die ()
 	{
-		playAnim ("death");
-
-		float length = 1.400f;
-		GameObject.Destroy (self, length);
+		// If unit has death animation, wait for it to end
+		float waitLength = 0.0f;
+		if (playAnim ("death"))
+			waitLength = 1.400f;
+		GameObject.Destroy (self, waitLength);
 
 		deployed = false;
 		loc = null;
@@ -184,17 +185,23 @@ public class Unit {
 	}
 
 	/// <summary>
-	/// One time play the animation with given name.
-	/// Animation must exist!!!
+	/// Play animations with given name once.
+	/// If unit does not have animation, play nothing and return false.
+	/// Precondition: Self must have Animation component.
 	/// </summary>
 	/// <param name="anim">Name of animation to play once.</param>
-	public void playAnim (string animName) {
+	public bool playAnim (string animName) {
 		Animation anim = self.GetComponent<Animation> ();
 
-		anim[animName].wrapMode = WrapMode.Once;
-		anim.Play (animName);
+		if (anim[animName]) {
+			anim[animName].wrapMode = WrapMode.Once;
+			anim.Play (animName);
 
-		anim.PlayQueued ("idle");
+			anim.PlayQueued ("idle");
+
+			return true;
+		} else
+			return false;
 	}
 
 	public void addSkill (Skill skill) {
