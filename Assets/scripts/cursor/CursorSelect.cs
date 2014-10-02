@@ -94,7 +94,7 @@ public class CursorSelect : MonoBehaviour {
 		}
 
 		// Either way, enable movement
-		GetComponent<CursorCardinalMotion> ().enabled = true;
+		Cursor.canMove = true;
 	}
 
 	/// <summary>
@@ -102,7 +102,7 @@ public class CursorSelect : MonoBehaviour {
 	/// </summary>
 	void selectActor ()
 	{
-		Unit u = Unit.get (Cursor.current.loc);
+		Unit u = Unit.get (Cursor.loc);
 		// Only select if there is a unit in space and that unit acts this turn
 		if (u  != null && u.team == Clock.current.activeTeam) {
 
@@ -130,7 +130,7 @@ public class CursorSelect : MonoBehaviour {
 	/// </summary>
 	void selectSpace ()
 	{
-		Loc cursorLoc = Cursor.current.loc;
+		Loc cursorLoc = Cursor.loc;
 
 		// Open menu if actor was selected
 		if (cursorLoc.Equals (actor.loc))
@@ -177,7 +177,7 @@ public class CursorSelect : MonoBehaviour {
 
 		bool canPerform = false;
 		foreach (Loc target in validTargets)
-			if (target.Equals(Cursor.current.loc))
+			if (target.Equals(Cursor.loc))
 				canPerform = true;
 		Debug.Log (validTargets);
 		if (actor.actCur < 1)
@@ -186,7 +186,7 @@ public class CursorSelect : MonoBehaviour {
 			canPerform = false;
 
 		if (canPerform) {
-			currentSkill.perform (Cursor.current.loc);
+			currentSkill.perform (Cursor.loc);
 
 			actor.actCur--;
 
@@ -211,7 +211,7 @@ public class CursorSelect : MonoBehaviour {
 		UnitMenu.current.open (actor);
 
 		// disable movement while menu is open
-		GetComponent<CursorCardinalMotion> ().enabled = false;
+		Cursor.canMove = false;
 
 		// TODO remove scaffolding
 		gameObject.renderer.material.color = Color.blue;

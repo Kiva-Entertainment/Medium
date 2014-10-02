@@ -25,7 +25,7 @@ public class Inspector : MonoBehaviour {
 	/// </summary>
 	void inspect ()
 	{
-		Unit u = Unit.get (Cursor.current.loc);
+		Unit u = Unit.get (Cursor.loc);
 		if (u != null) {
 			string result = 
 					u.name +
