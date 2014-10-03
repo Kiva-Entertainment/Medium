@@ -1,15 +1,15 @@
-﻿public class Dash : BasicSkill {
+﻿public class Craft : BasicSkill {
 	
 	public override int getCost () { return 0; }
 	public override string getName () { return "Dash"; }
 	
 	public override void perform (params Loc[] locs) {
 		actor.playAnim ("run");
-		actor.mvCur += 2;
+		new Rock (team: 0).deploy (locs [0]);
 	}
 	
 	public override Loc[] getRange (bool onlyValid) {
-		return BasicRange.self (actor).ToArray();
+		return BasicRange.self(actor).ToArray();
 	}
 	
 }

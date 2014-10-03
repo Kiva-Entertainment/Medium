@@ -16,29 +16,12 @@ public class Punch : BasicSkill {
 	}
 	
 	public override Loc[] getRange (bool onlyValid) {
-		List<Loc> result = new List<Loc> ();
-
-		// TODO make this exist in a single place. Make a range script
-		foreach (Loc offset in Loc.cardinals) {
-			Loc potLoc = actor.loc.plus (offset);
-
-			if (!World.current.isInBounds(potLoc))
-				continue;
-
-			// These are requirements for space range
-			// When checking if valid, must also ensure that space is occupied
-			if (!onlyValid) {
-				result.Add(potLoc);
-				continue;
-			}
-
-			if (Unit.get (potLoc) == null)
-				continue;
-				
-			result.Add(potLoc);
-		}
+		List<Loc> fullRange = BasicRange.sightline (actor, 1);
 		
-		return result.ToArray ();
+		if (onlyValid)
+			return SkillValidCheck.check(fullRange, occupied: true); 
+		else
+			return SkillValidCheck.check(fullRange, occupied: false);
 	}
 	
 }

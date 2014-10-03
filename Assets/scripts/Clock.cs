@@ -12,7 +12,7 @@ public class Clock : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		activeTeam = 0;
+		activeTeam = 1;
 		current = this;
 	}
 
@@ -34,9 +34,9 @@ public class Clock : MonoBehaviour {
 		Unit.refreshTeam (team: activeTeam);
 
 		// TODO Add support for more than 2 teams
-		if (activeTeam == 0)
-			activeTeam = 1;
+		if (activeTeam == 1)
+			activeTeam = 2;
 		else
-			activeTeam = 0;
+			activeTeam = 1;
 	}
 }

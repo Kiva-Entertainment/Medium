@@ -44,6 +44,10 @@ public class Loc : IEquatable<Loc> {
 		return new Loc (x + l.x, z + l.z);
 	}
 
+	public Loc scale (int s) {
+		return new Loc (x * s, z * s);
+	}
+
 	public bool Equals (Loc l2) {
 		return x == l2.x && z == l2.z;
 	}

@@ -18,7 +18,8 @@ public class Base : Unit {
                                   intelligence: 0,
                                   willpower: 0,
                                   regen: 0.0f,
-                                  team: team) {
+                                  team: team)
+	{
 		addSkill (new Deploy ().setActor(this) );
 	}
 }

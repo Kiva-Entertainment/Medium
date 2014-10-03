@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class Golem : Unit {
+﻿public class Golem : Unit {
 	public Golem(int team) : base(name: "Golem",
 	                        type: "Golem",
 	                        hpMax: 120,
