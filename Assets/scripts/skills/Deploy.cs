@@ -15,6 +15,6 @@ public class Deploy : BasicSkill {
 		if (onlyValid)
 			return SkillValidCheck.check(fullRange, unoccupied: true); 
 		else
-			return SkillValidCheck.check(fullRange, unoccupied: false); 
+			return SkillValidCheck.check(fullRange, unoccupied: false);
 	}
 }

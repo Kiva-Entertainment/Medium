@@ -17,5 +17,6 @@
 	{
 		addSkill (new Punch ().setActor(this) );
 		addSkill (new Dash ().setActor(this) );
+		addSkill (new Craft ().setActor(this) );
 	}
 }

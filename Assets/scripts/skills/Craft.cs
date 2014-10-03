@@ -1,7 +1,9 @@
-﻿public class Craft : BasicSkill {
+﻿using System.Collections.Generic;
+
+public class Craft : BasicSkill {
 	
 	public override int getCost () { return 0; }
-	public override string getName () { return "Dash"; }
+	public override string getName () { return "Craft"; }
 	
 	public override void perform (params Loc[] locs) {
 		actor.playAnim ("run");
@@ -9,7 +11,12 @@
 	}
 	
 	public override Loc[] getRange (bool onlyValid) {
-		return BasicRange.self(actor).ToArray();
+		List<Loc> fullRange = BasicRange.sightline (actor, 1);
+
+		if (onlyValid)
+			return SkillValidCheck.check(fullRange, unoccupied: true); 
+		else
+			return SkillValidCheck.check(fullRange, unoccupied: false);
 	}
 	
 }

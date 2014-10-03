@@ -15,6 +15,6 @@
 	                              regen: 0.0f,
 	                              team: 0)
 	{
-
+		// No skills :(
 	}
 }
